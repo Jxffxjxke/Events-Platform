@@ -1,6 +1,9 @@
-import React from "react";
 import { FlatList } from "react-native";
 import EventCard from "./EventCard";
+import { useEffect, useState } from "react";
+import { getEventsList } from "@/utils/getEventsList";
+
+export type URLparams = { latitude: string; longitude: string };
 
 export type Event = {
   eventname: string;
@@ -11,23 +14,23 @@ export type Event = {
 };
 
 const EventsList = () => {
+  const [eventsArray, setEventsArray] = useState<Event[]>([]);
 
-    // replace with events list from API
-  const eventsArray: Event[] = [
-    {
-      eventname: "eventname",
-      date: "date",
-      description: "description",
-      xlargeimageurl: "xlargeimageurl",
-      venue: { name: "venuename" },
-    },
-  ];
+  useEffect(() => {
+    const URLparams = { latitude: "53.4839", longitude: "-2.2446" };
+    getEventsList(URLparams).then(({results}) => {
+      setEventsArray(results);
+      console.log(eventsArray);
+      
+    });
+  }, []);
 
   return (
     <>
       <FlatList
         data={eventsArray}
         renderItem={({ item }) => <EventCard event={item} />}
+        keyExtractor={(item, index) => `${item.eventname}-${index}`}
       />
     </>
   );

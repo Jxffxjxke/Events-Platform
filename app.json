@@ -8,6 +8,9 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "extra": {
+      "SKIDDLE_API_KEY": "eaa92cb57d1d9d72a69feaddf994ff60"
+    },
     "ios": {
       "supportsTablet": true
     },
