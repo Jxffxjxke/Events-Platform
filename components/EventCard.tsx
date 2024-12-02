@@ -4,8 +4,6 @@ import type { Event } from "./EventsList";
 import { Text } from "react-native";
 
 const EventCard = ({ event }: { event: Event }) => {
-  console.log(event);
-
   return (
     <Card>
       <Card.Cover source={{ uri: event.xlargeimageurl }} />

@@ -1,13 +1,6 @@
-import EventsList from "@/components/EventsList";
-import { SafeAreaView } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Redirect } from "expo-router";
 
-export default function Index() {
-  return (
-    <SafeAreaProvider>
-      <SafeAreaView>
-        <EventsList />
-      </SafeAreaView>
-    </SafeAreaProvider>
-  );
+
+export default function Home() {
+  return <Redirect href='/home'/>
 }
