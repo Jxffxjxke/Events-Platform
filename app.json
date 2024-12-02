@@ -9,7 +9,9 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "extra": {
-      "SKIDDLE_API_KEY": "eaa92cb57d1d9d72a69feaddf994ff60"
+      "SKIDDLE_API_KEY": "eaa92cb57d1d9d72a69feaddf994ff60",
+      "SUPABASE_URL": "https://lcgnqdkqxdjuamxwrpft.supabase.co",
+      "ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjZ25xZGtxeGRqdWFteHdycGZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMxNjQ3NDQsImV4cCI6MjA0ODc0MDc0NH0.-8_ts3snOzuAGmh713sBGuJ8A2rIez1UXTYtlVUknQE"
     },
     "ios": {
       "supportsTablet": true

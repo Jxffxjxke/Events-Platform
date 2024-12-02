@@ -10,11 +10,12 @@ import {
 
 const settings = () => {
   const userDetails = {
-    username: "Jake",
-    name: "Jake Whittaker",
-    email: "jj.whittaker01@gmail.com",
+    username: "ExampleUserName",
+    name: "ExampleName",
+    email: "exampleEmail@exampleDomain.com",
     userPasswordLength: 10,
   };
+
   return (
     <ScrollView
       style={{
@@ -49,13 +50,14 @@ const settings = () => {
         buttonRightTitle={"Save"}
         value={userDetails.email}
       />
+      <SettingsDividerLong />
       <SettingsEditText
         title="Password"
         dialogDescription={"Change your password"}
         valuePlaceholder="..."
         negativeButtonTitle={"Cancel"}
         buttonRightTitle={"Save"}
-        value={'*'.repeat(userDetails.userPasswordLength)}
+        value={"*".repeat(userDetails.userPasswordLength)}
       />
     </ScrollView>
   );
