@@ -15,6 +15,15 @@ export default () => {
         }}
       />
       <Tabs.Screen
+        name="logIn"
+        options={{
+          title: "Log In",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={28} name="user" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="settings"
         options={{
           title: "Settings",
