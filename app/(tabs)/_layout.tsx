@@ -3,9 +3,9 @@ import { Tabs } from "expo-router";
 
 export default () => {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: "red" }}>
+    <Tabs>
       <Tabs.Screen
-        name="home"
+        name="Home"
         options={{
           title: "Home",
           headerShown: false,
@@ -15,7 +15,7 @@ export default () => {
         }}
       />
       <Tabs.Screen
-        name="logIn"
+        name="LogIn"
         options={{
           title: "Log In",
           tabBarIcon: ({ color }) => (
@@ -24,7 +24,7 @@ export default () => {
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="Settings"
         options={{
           title: "Settings",
           tabBarIcon: ({ color }) => (

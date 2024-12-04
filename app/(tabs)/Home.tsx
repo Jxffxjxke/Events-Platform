@@ -1,7 +1,7 @@
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import EventsList from "@/components/EventsList";
 
-const home = () => {
+const Home = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView>
@@ -11,4 +11,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;

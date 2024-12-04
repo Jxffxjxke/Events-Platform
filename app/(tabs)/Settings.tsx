@@ -1,20 +1,18 @@
+import { useState } from "react";
 import { ScrollView } from "react-native";
 import {
-  SettingsDividerShort,
   SettingsDividerLong,
   SettingsEditText,
   SettingsCategoryHeader,
-  SettingsSwitch,
-  SettingsPicker,
 } from "react-native-settings-components";
 
-const settings = () => {
-  const userDetails = {
-    username: "Jake",
+const Settings = () => {
+  const [userDetails, setUserDetails] = useState({
+    username: "Jxffxjxke",
     name: "Jake Whittaker",
     email: "jj.whittaker01@gmail.com",
     userPasswordLength: 10,
-  };
+  });
   return (
     <ScrollView
       style={{
@@ -30,6 +28,7 @@ const settings = () => {
         negativeButtonTitle={"Cancel"}
         buttonRightTitle={"Save"}
         value={userDetails.username}
+        positiveButtonTitle={"username"}
       />
       <SettingsDividerLong />
       <SettingsEditText
@@ -39,6 +38,7 @@ const settings = () => {
         negativeButtonTitle={"Cancel"}
         buttonRightTitle={"Save"}
         value={userDetails.name}
+        positiveButtonTitle={"name"}
       />
       <SettingsDividerLong />
       <SettingsEditText
@@ -48,6 +48,7 @@ const settings = () => {
         negativeButtonTitle={"Cancel"}
         buttonRightTitle={"Save"}
         value={userDetails.email}
+        positiveButtonTitle={"email"}
       />
       <SettingsEditText
         title="Password"
@@ -55,10 +56,11 @@ const settings = () => {
         valuePlaceholder="..."
         negativeButtonTitle={"Cancel"}
         buttonRightTitle={"Save"}
-        value={'*'.repeat(userDetails.userPasswordLength)}
+        value={"*".repeat(userDetails.userPasswordLength)}
+        positiveButtonTitle={"password"}
       />
     </ScrollView>
   );
 };
 
-export default settings;
+export default Settings;
