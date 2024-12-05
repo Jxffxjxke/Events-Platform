@@ -5,7 +5,6 @@ import { useLayoutEffect } from "react";
 
 export default function App() {
   const session = useSession();
-  console.log(session);
   
 
   useLayoutEffect(() => {
@@ -38,15 +37,6 @@ export default function App() {
             title: session ? "Account" : "Log In",
             tabBarIcon: ({ color }) => (
               <FontAwesome size={28} name="user" color={color} />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="Settings"
-          options={{
-            title: "Settings",
-            tabBarIcon: ({ color }) => (
-              <FontAwesome size={28} name="cog" color={color} />
             ),
           }}
         />

@@ -18,7 +18,7 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter(); // Initialize useRouter hook
+  const router = useRouter();
 
   async function signInWithEmail() {
     setLoading(true);
