@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
+import { useSession, useLoading } from "@/context/SessionContext";
 
-const MyEvents = ({ session }: { session: any }) => {
+const MyEvents = () => {
   const router = useRouter();
+  const session = useSession();
+  const loading = useLoading();
   const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
+    if (loading) {
+      return;
+    }
+
     if (!session) {
       setMessage("You are not logged in, to see your events please log in.");
       const timer = setTimeout(() => {
@@ -15,14 +22,24 @@ const MyEvents = ({ session }: { session: any }) => {
 
       return () => clearTimeout(timer);
     }
-  }, [session, router]);
+
+    setMessage("");
+  }, [session, loading, router]);
+
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       {message ? (
         <Text style={styles.message}>{message}</Text>
       ) : (
-        <Text>Loading...</Text>
+        <Text>My Events Page</Text>
       )}
     </View>
   );

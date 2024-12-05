@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Alert, StyleSheet, View, AppState } from "react-native";
 import { supabase } from "../lib/supabase";
 import { Button, Icon, Input } from "@rneui/themed";
+import { useSetSession } from "../context/SessionContext";
+import { useRouter } from "expo-router";
 
 AppState.addEventListener("change", (state) => {
   if (state === "active") {
@@ -12,18 +14,25 @@ AppState.addEventListener("change", (state) => {
 });
 
 export default function Auth() {
+  const setSession = useSetSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter(); // Initialize useRouter hook
 
   async function signInWithEmail() {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error, data } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
 
-    if (error) Alert.alert(error.message);
+    if (error) {
+      Alert.alert(error.message);
+    } else {
+      setSession(data?.session);
+      router.push("/Home");
+    }
     setLoading(false);
   }
 
@@ -37,9 +46,17 @@ export default function Auth() {
       password: password,
     });
 
-    if (error) Alert.alert(error.message);
-    if (!session)
-      Alert.alert("Please check your inbox for email verification!");
+    if (error) {
+      Alert.alert(error.message);
+    } else {
+      if (session) {
+        setSession(session);
+        router.push("/Home");
+      } else {
+        Alert.alert("Please check your inbox for email verification!");
+      }
+    }
+
     setLoading(false);
   }
 
@@ -70,7 +87,7 @@ export default function Auth() {
         <Button
           title="Log In"
           disabled={loading}
-          onPress={() => signInWithEmail()}
+          onPress={signInWithEmail}
           buttonStyle={styles.fitButton}
           titleStyle={styles.buttonText}
           containerStyle={styles.fitButtonContainer}
@@ -79,7 +96,7 @@ export default function Auth() {
         <Button
           title="Sign Up"
           disabled={loading}
-          onPress={() => signUpWithEmail()}
+          onPress={signUpWithEmail}
           buttonStyle={styles.fitButton}
           titleStyle={styles.buttonText}
           containerStyle={styles.fitButtonContainer}

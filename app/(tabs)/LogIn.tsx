@@ -1,22 +1,11 @@
-import { useState, useEffect } from "react";
-import { supabase } from "../../lib/supabase";
+import { useSession } from "../../context/SessionContext";
 import Auth from "../../components/Auth";
 import Account from "../../components/Account";
 import { View } from "react-native";
-import { Session } from "@supabase/supabase-js";
 
 const LogIn = () => {
-  const [session, setSession] = useState<Session | null>(null);
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
+  const session = useSession();
+  
 
   return (
     <View>
