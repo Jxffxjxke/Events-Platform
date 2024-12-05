@@ -3,11 +3,9 @@ import EventsList from "@/components/EventsList";
 
 const Home = () => {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView>
-        <EventsList />
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <SafeAreaView>
+      <EventsList />
+    </SafeAreaView>
   );
 };
 

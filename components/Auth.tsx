@@ -40,21 +40,34 @@ export default function Auth() {
     setLoading(true);
     const {
       data: { session },
-      error,
+      error: signUpError,
     } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
 
-    if (error) {
-      Alert.alert(error.message);
-    } else {
-      if (session) {
-        setSession(session);
-        router.push("/Home");
-      } else {
-        Alert.alert("Please check your inbox for email verification!");
+    if (signUpError) {
+      Alert.alert("Sign Up Error: " + signUpError.message);
+      setLoading(false);
+      return;
+    }
+
+    if (session) {
+      setSession(session);
+
+      const { data: user, error: userError } = await supabase
+        .from("users")
+        .insert([{ id: session.user.id, name: "Jake Whittaker" }]);
+
+      if (userError) {
+        Alert.alert("User Insert Error: " + userError.message);
+        setLoading(false);
+        return;
       }
+
+      router.push("/Home");
+    } else {
+      Alert.alert("Please check your inbox for email verification!");
     }
 
     setLoading(false);
