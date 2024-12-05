@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Alert, StyleSheet, View, AppState } from "react-native";
 import { supabase } from "../lib/supabase";
 import { Button, Icon, Input } from "@rneui/themed";
-import { Text } from "react-native-paper";
 
 AppState.addEventListener("change", (state) => {
   if (state === "active") {
@@ -13,7 +12,6 @@ AppState.addEventListener("change", (state) => {
 });
 
 export default function Auth() {
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -68,21 +66,23 @@ export default function Auth() {
           autoCapitalize={"none"}
         />
       </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+      <View style={styles.horizontallySpaced}>
         <Button
-          title="Sign in"
+          title="Log In"
           disabled={loading}
           onPress={() => signInWithEmail()}
+          buttonStyle={styles.fitButton}
+          titleStyle={styles.buttonText}
+          containerStyle={styles.fitButtonContainer}
         />
-      </View>
-      <View style={styles.horizontallySpaced}>
-        <Icon type="font-awesome" name="exchange" size={15} color={'blue'}/>
-      </View>
-      <View style={styles.verticallySpaced}>
+        <Icon type="font-awesome" name="exchange" size={15} color={"blue"} />
         <Button
-          title="Sign up"
+          title="Sign Up"
           disabled={loading}
           onPress={() => signUpWithEmail()}
+          buttonStyle={styles.fitButton}
+          titleStyle={styles.buttonText}
+          containerStyle={styles.fitButtonContainer}
         />
       </View>
     </View>
@@ -103,6 +103,19 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   horizontallySpaced: {
-    marginHorizontal: "auto",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+  fitButton: {
+    paddingVertical: 4,
+    borderRadius: 5,
+    minWidth: 0,
+  },
+  buttonText: {
+    fontSize: 16,
+  },
+  fitButtonContainer: {
+    alignSelf: "center",
   },
 });

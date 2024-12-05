@@ -1,93 +1,25 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import { StyleSheet, View, Alert } from "react-native";
 import { Button, Input } from "@rneui/themed";
 import { Session } from "@supabase/supabase-js";
 
 export default function Account({ session }: { session: Session }) {
-  console.log(session.user);
-
-  const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    if (session) getProfile();
-  }, [session]);
-
-  async function getProfile() {
-    try {
-      setLoading(true);
-      if (!session?.user) throw new Error("No user on the session!");
-
-      const { data, error, status } = await supabase
-        .from("profiles")
-        .select(`username`)
-        .eq("id", session?.user.id)
-        .single();
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        setUsername(data.username);
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        Alert.alert(error.message);
-      }
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function updateProfile({ username }: { username: string }) {
-    try {
-      setLoading(true);
-      if (!session?.user) throw new Error("No user on the session!");
-
-      const updates = {
-        id: session?.user.id,
-        username,
-        updated_at: new Date(),
-      };
-
-      const { error } = await supabase.from("profiles").upsert(updates);
-
-      if (error) {
-        throw error;
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        Alert.alert(error.message);
-      }
-    } finally {
-      setLoading(false);
-    }
-  }
 
   return (
     <View style={styles.container}>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Input label="Email" value={session?.user?.email} disabled />
       </View>
-      <View style={styles.verticallySpaced}>
-        <Input
-          label="Username"
-          value={username || ""}
-          onChangeText={(text: string) => setUsername(text)}
-        />
-      </View>
 
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
-          title={loading ? "Loading ..." : "Update"}
-          onPress={() => updateProfile({ username })}
-          disabled={loading}
+          title="Log Out"
+          onPress={() => supabase.auth.signOut()}
+          buttonStyle={styles.fitButton}
+          titleStyle={styles.buttonText}
+          containerStyle={styles.fitButtonContainer}
         />
-      </View>
-
-      <View style={styles.verticallySpaced}>
-        <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
       </View>
     </View>
   );
@@ -95,7 +27,7 @@ export default function Account({ session }: { session: Session }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
+    marginVertical: "auto",
     padding: 12,
   },
   verticallySpaced: {
@@ -105,5 +37,17 @@ const styles = StyleSheet.create({
   },
   mt20: {
     marginTop: 20,
+  },
+  fitButton: {
+    paddingVertical: 4,
+    borderRadius: 5,
+    width: "auto",
+    minWidth: 0,
+  },
+  buttonText: {
+    fontSize: 16,
+  },
+  fitButtonContainer: {
+    alignSelf: "center",
   },
 });
