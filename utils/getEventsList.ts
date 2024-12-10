@@ -13,7 +13,7 @@ export const getEventsList = async (URLparams: URLparams) => {
 
   try {
     const response = await fetch(
-      `https://www.skiddle.com/api/v1/events/search/?api_key=${apiKey}${paramString}&limit=100`
+      `https://www.skiddle.com/api/v1/events/search/?api_key=${apiKey}${paramString}&limit=100&order=distance`
     );
 
     if (!response.ok) {
