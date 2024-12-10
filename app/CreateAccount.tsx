@@ -1,36 +1,14 @@
-import { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { supabase } from "../lib/supabase";
+import { StyleSheet, Text, View } from "react-native";
 import { Button, Input } from "@rneui/themed";
-import { useSetSession } from "../context/SessionContext";
-import { useRouter } from "expo-router";
-import { signInWithEmail, signUpWithEmail } from "../utils/auth";
-import { Text } from "react-native-paper";
+import { signUpWithEmail } from "@/utils/auth";
 
-export default function SignIn(): JSX.Element {
-  const setSession = useSetSession();
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
-
-  const handleSignIn = async (): Promise<void> => {
-    setLoading(true);
-    await signInWithEmail(supabase, setSession, router, email, password);
-    setLoading(false);
-  };
-
-  const handleSignUp = async (): Promise<void> => {
-    setLoading(true);
-    await signUpWithEmail(supabase, setSession, router, email, password);
-    setLoading(false);
-  };
-
+export default function CreateAccount(setEmail, email, setPassword, password) {
   return (
     <View style={styles.container}>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Input
           label="Email"
+          leftIcon={{ type: "font-awesome", name: "envelope" }}
           onChangeText={(text) => setEmail(text)}
           value={email}
           placeholder="email@address.com"
@@ -40,6 +18,7 @@ export default function SignIn(): JSX.Element {
       <View style={styles.verticallySpaced}>
         <Input
           label="Password"
+          leftIcon={{ type: "font-awesome", name: "lock" }}
           onChangeText={(text) => setPassword(text)}
           value={password}
           secureTextEntry={true}
@@ -48,12 +27,21 @@ export default function SignIn(): JSX.Element {
         />
       </View>
       <View style={styles.horizontallySpaced}>
-        <Button title="Log In" disabled={loading} onPress={handleSignIn} />
+        <Button
+          title="Sign Up"
+          disabled={loading}
+          onPress={signUpWithEmail}
+          buttonStyle={styles.fitButton}
+          titleStyle={styles.buttonText}
+          containerStyle={styles.fitButtonContainer}
+        />
       </View>
-      <View style={styles.centeredText}>
+      <View style={(styles.mt20, styles.horizontallySpaced)}>
         <Text>
-          Don't have an account?{"  "}
-          <Text style={styles.underline}>Sign Up</Text>
+          Already have an account?{"  "}
+          <Link href="/CreateAccount" style={styles.underline}>
+            Sign In
+          </Link>
         </Text>
       </View>
     </View>
