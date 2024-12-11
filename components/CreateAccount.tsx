@@ -1,14 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Button, Input } from "@rneui/themed";
-import { signUpWithEmail } from "@/utils/auth";
+import { AuthProps } from "@/types/AuthProps";
 
-export default function CreateAccount(setEmail, email, setPassword, password) {
+export default function CreateAccount({
+  setEmail,
+  email,
+  setPassword,
+  password,
+  loading,
+  setPage,
+  handleSignUp,
+}: AuthProps): JSX.Element {
+
   return (
     <View style={styles.container}>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Input
           label="Email"
-          leftIcon={{ type: "font-awesome", name: "envelope" }}
           onChangeText={(text) => setEmail(text)}
           value={email}
           placeholder="email@address.com"
@@ -18,7 +26,6 @@ export default function CreateAccount(setEmail, email, setPassword, password) {
       <View style={styles.verticallySpaced}>
         <Input
           label="Password"
-          leftIcon={{ type: "font-awesome", name: "lock" }}
           onChangeText={(text) => setPassword(text)}
           value={password}
           secureTextEntry={true}
@@ -27,21 +34,19 @@ export default function CreateAccount(setEmail, email, setPassword, password) {
         />
       </View>
       <View style={styles.horizontallySpaced}>
-        <Button
-          title="Sign Up"
-          disabled={loading}
-          onPress={signUpWithEmail}
-          buttonStyle={styles.fitButton}
-          titleStyle={styles.buttonText}
-          containerStyle={styles.fitButtonContainer}
-        />
+        <Button title="Sign Up" disabled={loading} onPress={handleSignUp} />
       </View>
-      <View style={(styles.mt20, styles.horizontallySpaced)}>
+      <View style={styles.centeredText}>
         <Text>
           Already have an account?{"  "}
-          <Link href="/CreateAccount" style={styles.underline}>
+          <Text
+            style={styles.underline}
+            onPress={() => {
+              setPage("sign-in");
+            }}
+          >
             Sign In
-          </Link>
+          </Text>
         </Text>
       </View>
     </View>

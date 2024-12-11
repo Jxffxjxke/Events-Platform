@@ -3,17 +3,25 @@ import { StyleSheet, View } from "react-native";
 import { Button, Input } from "@rneui/themed";
 import { Session } from "@supabase/supabase-js";
 
-export default function Account({ session }: { session: Session }) {
+export default function Account({
+  session,
+  setPage,
+}: {
+  session: Session;
+  setPage: any;
+}) {
   return (
     <View style={styles.container}>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Input label="Email" value={session?.user?.email} disabled />
       </View>
-
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
           title="Log Out"
-          onPress={() => supabase.auth.signOut()}
+          onPress={() => {
+            supabase.auth.signOut();
+            setPage("sign-in");
+          }}
           buttonStyle={styles.fitButton}
           titleStyle={styles.buttonText}
           containerStyle={styles.fitButtonContainer}

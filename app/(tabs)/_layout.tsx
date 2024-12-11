@@ -32,7 +32,7 @@ export default function App() {
           }}
         />
         <Tabs.Screen
-          name="LogIn"
+          name="Auth"
           options={{
             title: session ? "Account" : "Log In",
             tabBarIcon: ({ color }) => (
