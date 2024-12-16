@@ -3,8 +3,6 @@ import EventCard from "./EventCard";
 import { useEffect, useState } from "react";
 import { getEventsList } from "@/utils/getEventsList";
 
-export type URLparams = { latitude: string | null; longitude: string | null };
-
 export type Event = {
   eventname: string;
   date: string;
@@ -18,8 +16,7 @@ const EventsList = () => {
   const [eventsArray, setEventsArray] = useState<Event[]>([]);
 
   useEffect(() => {
-    const URLparams = { latitude: null, longitude: null };
-    getEventsList(URLparams).then(({ results }) => {
+    getEventsList().then(( results ) => {
       setEventsArray(results);
     });
   }, []);

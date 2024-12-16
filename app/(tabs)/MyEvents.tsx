@@ -17,7 +17,7 @@ const MyEvents = () => {
     if (!session) {
       setMessage("You are not logged in, to see your events please log in.");
       const timer = setTimeout(() => {
-        router.push("/LogIn");
+        router.push("/Auth");
       }, 3000);
 
       return () => clearTimeout(timer);
