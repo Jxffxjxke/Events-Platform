@@ -1,17 +1,15 @@
 import { Card, Title } from "react-native-paper";
-import type { Event } from "./EventsList";
+import { Event } from "@/types/Event";
 import { Text } from "react-native";
 import { formatDate } from "@/utils/formatDate";
 
 const EventCard = ({ event }: { event: Event }) => {
-  const date = formatDate(event.date.slice(0, 10));
-
   return (
     <Card>
-      <Card.Cover source={{ uri: event.xlargeimageurl }} />
+      <Card.Cover source={{ uri: event.image }} />
       <Card.Content>
-        <Title>{event.eventname}</Title>
-        <Text>{date}</Text>
+        <Title>{event.title}</Title>
+        <Text>{formatDate(event.date)}</Text>
         <Text>
           {event.doorsopen} - {event.doorsclose}
         </Text>

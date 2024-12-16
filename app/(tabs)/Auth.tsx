@@ -1,11 +1,9 @@
 import { useSession } from "../../context/SessionContext";
-import { DismissKeyboard } from "@/components/DissmissKeyboard";
 import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { useSetSession } from "../../context/SessionContext";
 import { useRouter } from "expo-router";
 import { signInWithEmail, signUpWithEmail } from "../../utils/auth";
-import { Text } from "react-native-paper";
 
 import SignIn from "@/components/SignIn";
 import Account from "@/components/Account";
@@ -46,9 +44,11 @@ const Auth: React.FC = () => {
     }
   };
 
+  console.log(page, session);
+  
+
   if (page === "sign-in") {
     return (
-      <DismissKeyboard>
         <SignIn
           email={email}
           setEmail={setEmail}
@@ -58,7 +58,6 @@ const Auth: React.FC = () => {
           setPage={setPage}
           handleSignIn={handleSignIn}
         />
-      </DismissKeyboard>
     );
   } else if (page === "sign-up") {
     return (
@@ -74,9 +73,7 @@ const Auth: React.FC = () => {
     );
   } else if (page === "account" && session) {
     return <Account session={session} setPage={setPage} />;
-  } else {
-    return <Text>Error</Text>;
-  }
+  } 
 };
 
 export default Auth;
