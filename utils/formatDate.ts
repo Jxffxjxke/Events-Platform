@@ -1,5 +1,5 @@
 export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
+  const date = new Date(dateString.slice(0, 10));
   const day = date.getDate();
   const month = date.toLocaleString("default", { month: "long" });
   const year = date.getFullYear();
