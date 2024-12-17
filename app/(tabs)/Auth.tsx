@@ -4,6 +4,7 @@ import { supabase } from "../../lib/supabase";
 import { useSetSession } from "../../context/SessionContext";
 import { useRouter } from "expo-router";
 import { signInWithEmail, signUpWithEmail } from "../../utils/auth";
+import { Alert } from "react-native";
 
 import SignIn from "@/components/SignIn";
 import Account from "@/components/Account";
@@ -25,8 +26,12 @@ const Auth: React.FC = () => {
     try {
       await signInWithEmail(supabase, setSession, router, email, password);
       setPage("account");
-    } catch (error) {
-      console.error("Error signing in:", error);
+    } catch (error: any) {
+      Alert.alert(
+        "Invalid Credentials",
+        error.message || "Please check your email and password."
+      );
+      setPage("sign-in");
     } finally {
       setLoading(false);
     }
@@ -38,26 +43,23 @@ const Auth: React.FC = () => {
       await signUpWithEmail(supabase, setSession, router, email, password);
       setPage("account");
     } catch (error) {
-      console.error("Error signing up:", error);
+      setPage("sign-up");
     } finally {
       setLoading(false);
     }
   };
 
-  console.log(page, session);
-  
-
   if (page === "sign-in") {
     return (
-        <SignIn
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          loading={loading}
-          setPage={setPage}
-          handleSignIn={handleSignIn}
-        />
+      <SignIn
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        loading={loading}
+        setPage={setPage}
+        handleSignIn={handleSignIn}
+      />
     );
   } else if (page === "sign-up") {
     return (
@@ -73,7 +75,7 @@ const Auth: React.FC = () => {
     );
   } else if (page === "account" && session) {
     return <Account session={session} setPage={setPage} />;
-  } 
+  }
 };
 
 export default Auth;
