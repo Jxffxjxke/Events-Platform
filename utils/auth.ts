@@ -13,7 +13,6 @@ export async function signInWithEmail(
   });
 
   if (error) {
-    
     throw new Error(error.message);
   }
 
@@ -26,14 +25,16 @@ export async function signUpWithEmail(
   setSession: (session: Session | null) => void,
   router: any,
   email: string,
-  password: string
+  password: string,
+  username: string
 ): Promise<void> {
   const {
     data: { session },
     error: signUpError,
   } = await supabase.auth.signUp({
-    email: email,
-    password: password,
+    email,
+    password,
+    options: { data: { name: username } },
   });
 
   if (signUpError) {
@@ -45,7 +46,7 @@ export async function signUpWithEmail(
 
     const { error: userError } = await supabase
       .from("users")
-      .insert([{ id: session.user.id, name: "Jake Whittaker" }]);
+      .insert([{ id: session.user.id, name: username }]);
 
     if (userError) {
       throw new Error("User Insert Error: " + userError.message);

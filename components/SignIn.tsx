@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, Input } from "@rneui/themed";
 import { AuthProps } from "@/types/AuthProps";
 
@@ -12,43 +12,45 @@ export default function SignIn({
   handleSignIn,
 }: AuthProps): JSX.Element {
   return (
-    <View style={styles.container}>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input
-          label="Email"
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          placeholder="email@address.com"
-          autoCapitalize={"none"}
-        />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Input
-          label="Password"
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          secureTextEntry={true}
-          placeholder="Password"
-          autoCapitalize={"none"}
-        />
-      </View>
-      <View style={styles.horizontallySpaced}>
-        <Button title="Log In" disabled={loading} onPress={handleSignIn} />
-      </View>
-      <View style={styles.centeredText}>
-        <Text>
-          Don't have an account?{"  "}
-          <Text
-            style={styles.underline}
-            onPress={() => {
-              setPage("sign-up");
-            }}
-          >
-            Sign Up
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={[styles.verticallySpaced, styles.mt20]}>
+          <Input
+            label="Email"
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+            placeholder="email@address.com"
+            autoCapitalize={"none"}
+          />
+        </View>
+        <View style={styles.verticallySpaced}>
+          <Input
+            label="Password"
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            secureTextEntry={true}
+            placeholder="Password"
+            autoCapitalize={"none"}
+          />
+        </View>
+        <View style={styles.horizontallySpaced}>
+          <Button title="Log In" disabled={loading} onPress={handleSignIn} />
+        </View>
+        <View style={styles.centeredText}>
+          <Text>
+            Don't have an account?{"  "}
+            <Text
+              style={styles.underline}
+              onPress={() => {
+                setPage!("sign-up");
+              }}
+            >
+              Sign Up
+            </Text>
           </Text>
-        </Text>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
