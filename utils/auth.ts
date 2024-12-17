@@ -1,4 +1,3 @@
-import { Alert } from "react-native";
 import { SupabaseClient, Session } from "@supabase/supabase-js";
 
 export async function signInWithEmail(
@@ -14,11 +13,12 @@ export async function signInWithEmail(
   });
 
   if (error) {
-    Alert.alert(error.message);
-  } else {
-    setSession(data?.session || null);
-    router.push("/Home");
+    
+    throw new Error(error.message);
   }
+
+  setSession(data?.session || null);
+  router.push("/Home");
 }
 
 export async function signUpWithEmail(
@@ -37,24 +37,22 @@ export async function signUpWithEmail(
   });
 
   if (signUpError) {
-    Alert.alert("Sign Up Error: " + signUpError.message);
-    return;
+    throw new Error("Sign Up Error: " + signUpError.message);
   }
 
   if (session) {
     setSession(session);
 
-    const { data: user, error: userError } = await supabase
+    const { error: userError } = await supabase
       .from("users")
       .insert([{ id: session.user.id, name: "Jake Whittaker" }]);
 
     if (userError) {
-      Alert.alert("User Insert Error: " + userError.message);
-      return;
+      throw new Error("User Insert Error: " + userError.message);
     }
 
     router.push("/Home");
   } else {
-    Alert.alert("Please check your inbox for email verification!");
+    throw new Error("Please check your inbox for email verification!");
   }
 }
