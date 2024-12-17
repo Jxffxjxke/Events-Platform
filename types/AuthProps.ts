@@ -3,6 +3,8 @@ export type Page = "sign-in" | "sign-up" | "account";
 export type SetPage = (page: Page) => void;
 
 export type AuthProps = {
+  username?: string;
+  setUsername?: (usernmame: string) => void;
   setEmail: (email: string) => void;
   email: string;
   setPassword: (password: string) => void;

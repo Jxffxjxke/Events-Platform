@@ -15,6 +15,7 @@ const Auth: React.FC = () => {
   const session = useSession();
   const setSession = useSetSession();
 
+  const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -40,7 +41,14 @@ const Auth: React.FC = () => {
   const handleSignUp = async (): Promise<void> => {
     setLoading(true);
     try {
-      await signUpWithEmail(supabase, setSession, router, email, password);
+      await signUpWithEmail(
+        supabase,
+        setSession,
+        router,
+        email,
+        password,
+        username
+      );
       setPage("account");
     } catch (error) {
       setPage("sign-up");
@@ -64,6 +72,8 @@ const Auth: React.FC = () => {
   } else if (page === "sign-up") {
     return (
       <CreateAccount
+        username={username}
+        setUsername={setUsername}
         email={email}
         setEmail={setEmail}
         password={password}
