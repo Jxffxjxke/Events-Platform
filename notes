@@ -1,8 +1,6 @@
-Need to check is user is 'user' or 'admin' to conditionally render add event component. Will be a small circle with plus on to navigate to add new event page.
+Need to check if user is 'user' or 'admin' to conditionally render add event component. Will be a small circle with plus on to navigate to add new event page.
 
 Need a bin icon on events that are created by the admin for that admin.
-
-Add a username when signing up and add that to the supabase users table.
 
 Create SQL querys to suit add new event, remove event.
 
