@@ -2,6 +2,10 @@ export type Page = "sign-in" | "sign-up" | "account";
 
 export type SetPage = (page: Page) => void;
 
+export type UserType = "admin" | "user" | null;
+
+export type SetUserType = (userType: UserType) => void;
+
 export type AuthProps = {
   username?: string;
   setUsername?: (usernmame: string) => void;

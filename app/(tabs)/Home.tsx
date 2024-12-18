@@ -1,38 +1,18 @@
 import { useEffect, useState } from "react";
 import { SafeAreaView, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { supabase } from "@/lib/supabase";
 import { useSession } from "@/context/SessionContext";
 import EventsList from "@/components/EventsList";
+import { fetchUserType } from "@/utils/fetchUserType";
+import { UserType } from "@/types/AuthProps";
 
 const Home = () => {
   const session = useSession();
-  const [userType, setUserType] = useState(null);
+  const [userType, setUserType] = useState<UserType>(null);
 
   useEffect(() => {
-    const fetchUserType = async () => {
-      if (!session?.user?.id) {
-        console.log("No session found, user not logged in.");
-        return;
-      }
-
-      try {
-        // Query the users table for the user_type based on the session user ID
-        const { data, error } = await supabase
-          .from("users")
-          .select("user_type")
-          .eq("id", session.user.id)
-          .single();
-
-        if (error) throw error;
-
-        setUserType(data?.user_type || "User type not found");
-      } catch (error) {
-        console.error("Error fetching user type:", error);
-        setUserType(null);
-      }
-    };
-
-    fetchUserType();
+    if (session) {
+      fetchUserType(session, setUserType);
+    }
   }, [session]);
 
   const handleAddEvent = () => {
