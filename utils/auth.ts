@@ -36,12 +36,14 @@ export async function signUpWithEmail(
     password,
     options: { data: { name: username } },
   });
+  console.log("In");
 
   if (signUpError) {
     throw new Error("Sign Up Error: " + signUpError.message);
   }
 
   if (session) {
+
     setSession(session);
 
     const { error: userError } = await supabase
