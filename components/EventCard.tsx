@@ -1,3 +1,4 @@
+import { formatDate } from "@/utils/formatDate";
 import { useState } from "react";
 import {
   View,
@@ -33,11 +34,11 @@ const EventCard = ({ event }: { event: Event }) => {
       <Image source={{ uri: event.image }} style={styles.cardImage} />
 
       <View style={styles.cardContent}>
-        <Text style={styles.title}>{event.title}</Text>
+        <Text style={[styles.title, styles.mv]}>{event.title}</Text>
 
-        <Text>{event.date}</Text>
+        <Text style={styles.mv}>{formatDate(event.date)}</Text>
 
-        <Text>
+        <Text style={styles.mv}>
           {event.doorsopen} - {event.doorsclose}
         </Text>
 
@@ -126,8 +127,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
   },
+  mv: { marginVertical: 5 },
 });
-
-
 
 export default EventCard;

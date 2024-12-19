@@ -2,6 +2,4 @@ Need a bin icon on events that are created by the admin for that admin.
 
 Create SQL querys to suit add new event, remove event.
 
-New page for singular event which shows description.
-
 Add event to phone calendar using expo calendar.
