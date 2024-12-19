@@ -10,9 +10,6 @@ export default function Account({
   session: Session;
   setPage: any;
 }) {
-  console.log(JSON.stringify(session.user.user_metadata.name, null, 2));
-
-
   return (
     <View style={styles.container}>
       <View style={[styles.verticallySpaced, styles.mt20]}>
