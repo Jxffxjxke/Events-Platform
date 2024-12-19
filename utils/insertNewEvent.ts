@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
 
 interface EventDetails {
+  image: string;
   title: string;
   location: string;
   description: string;
@@ -11,6 +12,7 @@ interface EventDetails {
 }
 
 export const insertNewEvent = async ({
+  image,
   title,
   location,
   description,
@@ -19,7 +21,6 @@ export const insertNewEvent = async ({
   closingTime,
   creator_id,
 }: EventDetails) => {
-  
   const formattedOpeningTime = openingTime.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
@@ -34,6 +35,7 @@ export const insertNewEvent = async ({
       .from("events")
       .insert([
         {
+          image,
           title,
           location,
           description,
