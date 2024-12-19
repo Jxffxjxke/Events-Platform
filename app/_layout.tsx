@@ -8,7 +8,7 @@ export default function StackLayout() {
       <SessionProvider>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="addEvent" options={{ headerShown: false }} />
+          <Stack.Screen name="AddEvent" options={{ headerShown: false }} />
         </Stack>
       </SessionProvider>
     </SafeAreaProvider>

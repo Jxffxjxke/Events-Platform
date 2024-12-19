@@ -4,12 +4,16 @@ import { useSession } from "@/context/SessionContext";
 import EventsList from "@/components/EventsList";
 import { fetchUserType } from "@/utils/fetchUserType";
 import { UserType } from "@/types/AuthProps";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "expo-router";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AppStackParamList } from "@/types/NavigationTypes";
+
+type NavigationProp = NativeStackNavigationProp<AppStackParamList, "(tabs)">;
 
 const Home = () => {
   const session = useSession();
   const [userType, setUserType] = useState<UserType>(null);
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   useEffect(() => {
     if (session) {
@@ -18,7 +22,7 @@ const Home = () => {
   }, [session]);
 
   const handleAddEvent = () => {
-    navigation.navigate("addEvent");
+    navigation.navigate("AddEvent");
   };
 
   return (

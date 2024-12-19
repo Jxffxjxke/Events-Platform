@@ -30,6 +30,7 @@ async function populateEvents() {
       doorsclose,
       location: faker.location.city(),
       image: faker.image.url(),
+      creator_id: "cea5bc81-f55d-4d6b-928f-4dfe026f4feb",
     });
 
     if (error) {

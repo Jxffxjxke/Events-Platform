@@ -10,6 +10,9 @@ import {
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { DismissKeyboard } from "@/components/DissmissKeyboard";
+import { useRouter } from "expo-router";
+import { useSession } from "@/context/SessionContext";
+import { insertNewEvent } from "@/utils/insertNewEvent";
 
 type EventDetails = {
   title: string;
@@ -20,6 +23,7 @@ type EventDetails = {
 };
 
 export default function AddEvent() {
+  const session = useSession();
   const [eventDetails, setEventDetails] = useState<EventDetails>({
     title: "",
     description: "",
@@ -27,13 +31,21 @@ export default function AddEvent() {
     openingTime: new Date(),
     closingTime: new Date(),
   });
-  console.log(eventDetails);
+
+  const router = useRouter();
 
   const [datePicker, setDatePicker] = useState<boolean>(false);
   const [openingTimePicker, setOpeningTimePicker] = useState<boolean>(false);
   const [closingTimePicker, setClosingTimePicker] = useState<boolean>(false);
 
-  const handleAddEvent = () => {
+  const handleAddEvent = async () => {
+    console.log(session);
+
+    if (!session) {
+      Alert.alert("Error", "Session not loaded. Please try again later.");
+      return;
+    }
+
     const { title, description, date, openingTime, closingTime } = eventDetails;
 
     if (!title || !description) {
@@ -44,15 +56,38 @@ export default function AddEvent() {
       return;
     }
 
-    console.log({
-      title,
-      description,
-      date: date.toDateString(),
-      openingTime: openingTime.toLocaleTimeString(),
-      closingTime: closingTime.toLocaleTimeString(),
-    });
+    console.log(session);
 
-    Alert.alert("Event Added", "Your event has been successfully added!");
+    const creator_id = session?.user?.id;
+
+    if (!creator_id) {
+      Alert.alert("Error", "User ID not found. Please log in again.");
+      return;
+    }
+
+    try {
+      await insertNewEvent({
+        title,
+        description,
+        date,
+        openingTime,
+        closingTime,
+        creator_id,
+      });
+
+      Alert.alert("Success", "Your event has been successfully added!", [
+        {
+          text: "OK",
+          onPress: () => router.push("/Home"),
+        },
+      ]);
+    } catch (error) {
+      console.error("Error adding event:", error);
+      Alert.alert(
+        "Error",
+        "There was an issue adding your event. Please try again."
+      );
+    }
   };
 
   const handleChange = (field: keyof EventDetails, value: any) => {
@@ -74,8 +109,6 @@ export default function AddEvent() {
     selectedTime: Date | undefined
   ) => {
     if (selectedTime) {
-      console.log(selectedTime);
-
       const updatedTime = new Date(eventDetails[field]);
       updatedTime.setHours(selectedTime.getHours());
       updatedTime.setMinutes(selectedTime.getMinutes());
