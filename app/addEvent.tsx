@@ -12,23 +12,20 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { DismissKeyboard } from "@/components/DissmissKeyboard";
 
 export default function AddEvent() {
-  const [datePicker, setDatePicker] = useState<boolean>(false);
-  const [openingTimePicker, setOpeningTimePicker] = useState<boolean>(false);
-  const [closingTimePicker, setClosingTimePicker] = useState<boolean>(false);
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [date, setDate] = useState<Date>(new Date());
-  const [openingTime, setOpeningTime] = useState<Date>(new Date());
-  const [closingTime, setClosingTime] = useState<Date>(new Date());
+  const [eventDetails, setEventDetails] = useState({
+    title: "",
+    description: "",
+    date: new Date(),
+    openingTime: new Date(),
+    closingTime: new Date(),
+  });
+  const [datePicker, setDatePicker] = useState(false);
+  const [openingTimePicker, setOpeningTimePicker] = useState(false);
+  const [closingTimePicker, setClosingTimePicker] = useState(false);
 
   const handleAddEvent = () => {
-    console.log({
-      title,
-      description,
-      date: date.toDateString(),
-      openingTime: openingTime.toLocaleTimeString(),
-      closingTime: closingTime.toLocaleTimeString(),
-    });
+    const { title, description, date, openingTime, closingTime } = eventDetails;
+
     if (!title || !description) {
       Alert.alert(
         "Validation Error",
@@ -37,7 +34,22 @@ export default function AddEvent() {
       return;
     }
 
+    console.log({
+      title,
+      description,
+      date: date.toDateString(),
+      openingTime: openingTime.toLocaleTimeString(),
+      closingTime: closingTime.toLocaleTimeString(),
+    });
+
     Alert.alert("Event Added", "Your event has been successfully added!");
+  };
+
+  const handleChange = (field: string, value: any) => {
+    setEventDetails((prevDetails) => ({
+      ...prevDetails,
+      [field]: value,
+    }));
   };
 
   return (
@@ -48,16 +60,16 @@ export default function AddEvent() {
           <TextInput
             style={styles.input}
             placeholder="Enter event title"
-            value={title}
-            onChangeText={setTitle}
+            value={eventDetails.title}
+            onChangeText={(text) => handleChange("title", text)}
           />
 
           <Text style={styles.label}>Description</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter event description"
-            value={description}
-            onChangeText={setDescription}
+            value={eventDetails.description}
+            onChangeText={(text) => handleChange("description", text)}
             multiline
             numberOfLines={4}
           />
@@ -67,61 +79,85 @@ export default function AddEvent() {
             style={styles.pickerButton}
             onPress={() => setDatePicker(true)}
           >
-            <Text style={styles.pickerButtonText}>{date.toDateString()}</Text>
+            <Text style={styles.pickerButtonText}>
+              {eventDetails.date.toDateString()}
+            </Text>
           </TouchableOpacity>
           {datePicker && (
             <DateTimePicker
-              value={date}
-              mode={"date"}
+              value={eventDetails.date}
+              mode="date"
               display="default"
+              minimumDate={new Date()}
+              maximumDate={
+                new Date(new Date().setFullYear(new Date().getFullYear() + 2))
+              }
               onChange={(event, selectedDate) => {
-                setDate(selectedDate || date);
+                handleChange("date", selectedDate || eventDetails.date);
                 setDatePicker(false);
               }}
             />
           )}
 
-          <Text style={styles.label}>Opening Time</Text>
-          <TouchableOpacity
-            style={styles.pickerButton}
-            onPress={() => setOpeningTimePicker(true)}
-          >
-            <Text style={styles.pickerButtonText}>
-              {openingTime.toLocaleTimeString()}
-            </Text>
-          </TouchableOpacity>
-          {openingTimePicker && (
-            <DateTimePicker
-              value={openingTime}
-              mode={"time"}
-              display="default"
-              onChange={(event, selectedTime) => {
-                setOpeningTime(selectedTime || openingTime);
-                setOpeningTimePicker(false);
-              }}
-            />
-          )}
+          <View style={styles.timePickerContainer}>
+            <View style={styles.timePicker}>
+              <Text style={styles.label}>Opening Time</Text>
+              <TouchableOpacity
+                style={styles.pickerButton}
+                onPress={() => setOpeningTimePicker(true)}
+              >
+                <Text style={styles.pickerButtonText}>
+                  {eventDetails.openingTime.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </Text>
+              </TouchableOpacity>
+              {openingTimePicker && (
+                <DateTimePicker
+                  value={eventDetails.openingTime}
+                  mode="time"
+                  display="default"
+                  onChange={(event, selectedTime) => {
+                    handleChange(
+                      "openingTime",
+                      selectedTime || eventDetails.openingTime
+                    );
+                    setOpeningTimePicker(false);
+                  }}
+                />
+              )}
+            </View>
 
-          <Text style={styles.label}>Closing Time</Text>
-          <TouchableOpacity
-            style={styles.pickerButton}
-            onPress={() => setClosingTimePicker(true)}
-          >
-            <Text style={styles.pickerButtonText}>
-              {closingTime.toLocaleTimeString()}
-            </Text>
-          </TouchableOpacity>
-          {closingTimePicker && (
-            <DateTimePicker
-              value={closingTime}
-              mode={"time"}
-              display="default"
-              onChange={(event, selectedTime) => {
-                setClosingTime(selectedTime || closingTime);
-                setClosingTimePicker(false);
-              }}
-            />
-          )}
+            <View style={styles.timePicker}>
+              <Text style={styles.label}>Closing Time</Text>
+              <TouchableOpacity
+                style={styles.pickerButton}
+                onPress={() => setClosingTimePicker(true)}
+              >
+                <Text style={styles.pickerButtonText}>
+                  {eventDetails.closingTime.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </Text>
+              </TouchableOpacity>
+              {closingTimePicker && (
+                <DateTimePicker
+                  value={eventDetails.closingTime}
+                  mode="time"
+                  display="default"
+                  onChange={(event, selectedTime) => {
+                    handleChange(
+                      "closingTime",
+                      selectedTime || eventDetails.closingTime
+                    );
+                    setClosingTimePicker(false);
+                  }}
+                />
+              )}
+            </View>
+          </View>
 
           <TouchableOpacity style={styles.addButton} onPress={handleAddEvent}>
             <Text style={styles.addButtonText}>Add Event</Text>
@@ -171,6 +207,16 @@ const styles = StyleSheet.create({
   pickerButtonText: {
     fontSize: 16,
     color: "#333",
+  },
+  timePickerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    marginBottom: 15,
+  },
+  timePicker: {
+    flex: 1,
+    marginHorizontal: 5,
   },
   addButton: {
     padding: 15,
