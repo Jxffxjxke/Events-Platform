@@ -45,10 +45,8 @@ export const insertNewEvent = async ({
       throw error;
     }
 
-    console.log("Event inserted:", data);
     return data;
   } catch (error) {
-    console.error("Error inserting event:", error);
     throw new Error("Failed to add the event. Please try again.");
   }
 };
