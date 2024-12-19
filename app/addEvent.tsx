@@ -11,17 +11,27 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { DismissKeyboard } from "@/components/DissmissKeyboard";
 
+type EventDetails = {
+  title: string;
+  description: string;
+  date: Date;
+  openingTime: Date;
+  closingTime: Date;
+};
+
 export default function AddEvent() {
-  const [eventDetails, setEventDetails] = useState({
+  const [eventDetails, setEventDetails] = useState<EventDetails>({
     title: "",
     description: "",
     date: new Date(),
     openingTime: new Date(),
     closingTime: new Date(),
   });
-  const [datePicker, setDatePicker] = useState(false);
-  const [openingTimePicker, setOpeningTimePicker] = useState(false);
-  const [closingTimePicker, setClosingTimePicker] = useState(false);
+  console.log(eventDetails);
+
+  const [datePicker, setDatePicker] = useState<boolean>(false);
+  const [openingTimePicker, setOpeningTimePicker] = useState<boolean>(false);
+  const [closingTimePicker, setClosingTimePicker] = useState<boolean>(false);
 
   const handleAddEvent = () => {
     const { title, description, date, openingTime, closingTime } = eventDetails;
@@ -45,11 +55,33 @@ export default function AddEvent() {
     Alert.alert("Event Added", "Your event has been successfully added!");
   };
 
-  const handleChange = (field: string, value: any) => {
+  const handleChange = (field: keyof EventDetails, value: any) => {
     setEventDetails((prevDetails) => ({
       ...prevDetails,
       [field]: value,
     }));
+  };
+
+  const handleDateChange = (selectedDate: Date | undefined) => {
+    if (selectedDate) {
+      handleChange("date", selectedDate);
+    }
+    setDatePicker(false);
+  };
+
+  const handleTimeChange = (
+    field: "openingTime" | "closingTime",
+    selectedTime: Date | undefined
+  ) => {
+    if (selectedTime) {
+      console.log(selectedTime);
+
+      const updatedTime = new Date(eventDetails[field]);
+      updatedTime.setHours(selectedTime.getHours());
+      updatedTime.setMinutes(selectedTime.getMinutes());
+      updatedTime.setSeconds(selectedTime.getSeconds());
+      handleChange(field, updatedTime);
+    }
   };
 
   return (
@@ -88,14 +120,7 @@ export default function AddEvent() {
               value={eventDetails.date}
               mode="date"
               display="default"
-              minimumDate={new Date()}
-              maximumDate={
-                new Date(new Date().setFullYear(new Date().getFullYear() + 2))
-              }
-              onChange={(event, selectedDate) => {
-                handleChange("date", selectedDate || eventDetails.date);
-                setDatePicker(false);
-              }}
+              onChange={(event, selectedDate) => handleDateChange(selectedDate)}
             />
           )}
 
@@ -119,10 +144,7 @@ export default function AddEvent() {
                   mode="time"
                   display="default"
                   onChange={(event, selectedTime) => {
-                    handleChange(
-                      "openingTime",
-                      selectedTime || eventDetails.openingTime
-                    );
+                    handleTimeChange("openingTime", selectedTime);
                     setOpeningTimePicker(false);
                   }}
                 />
@@ -148,10 +170,7 @@ export default function AddEvent() {
                   mode="time"
                   display="default"
                   onChange={(event, selectedTime) => {
-                    handleChange(
-                      "closingTime",
-                      selectedTime || eventDetails.closingTime
-                    );
+                    handleTimeChange("closingTime", selectedTime);
                     setClosingTimePicker(false);
                   }}
                 />
@@ -175,10 +194,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     backgroundColor: "#fff",
-  },
-  form: {
-    width: "100%",
-    maxWidth: 400,
   },
   label: {
     fontSize: 16,
