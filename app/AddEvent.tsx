@@ -39,8 +39,6 @@ export default function AddEvent() {
   const [closingTimePicker, setClosingTimePicker] = useState<boolean>(false);
 
   const handleAddEvent = async () => {
-    console.log(session);
-
     if (!session) {
       Alert.alert("Error", "Session not loaded. Please try again later.");
       return;
@@ -55,8 +53,6 @@ export default function AddEvent() {
       );
       return;
     }
-
-    console.log(session);
 
     const creator_id = session?.user?.id;
 
@@ -82,7 +78,6 @@ export default function AddEvent() {
         },
       ]);
     } catch (error) {
-      console.error("Error adding event:", error);
       Alert.alert(
         "Error",
         "There was an issue adding your event. Please try again."
@@ -214,6 +209,13 @@ export default function AddEvent() {
           <TouchableOpacity style={styles.addButton} onPress={handleAddEvent}>
             <Text style={styles.addButtonText}>Add Event</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => router.push("/Home")}
+          >
+            <Text style={styles.backButtonText}>Back</Text>
+          </TouchableOpacity>
         </View>
       </DismissKeyboard>
     </SafeAreaProvider>
@@ -276,6 +278,18 @@ const styles = StyleSheet.create({
   },
   addButtonText: {
     fontSize: 16,
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  backButton: {
+    position: "absolute",
+    bottom: 20,
+    right: 20,
+    padding: 10,
+    backgroundColor: "#007BFF",
+    borderRadius: 50,
+  },
+  backButtonText: {
     color: "#fff",
     fontWeight: "bold",
   },
