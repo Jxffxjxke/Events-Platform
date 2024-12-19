@@ -2,29 +2,45 @@ import { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useSession, useLoading } from "@/context/SessionContext";
+import { fetchUserType } from "@/utils/fetchUserType";
+import { UserType } from "@/types/AuthProps";
+import MyEventsList from "@/components/MyEventsList";
+import fetchUserEvents from "@/utils/fetchUserEvents";
 
 const MyEvents = () => {
   const router = useRouter();
   const session = useSession();
   const loading = useLoading();
   const [message, setMessage] = useState<string>("");
+  const [userType, setUserType] = useState<UserType>(null);
+  const [myEventsList, setMyEventsList] = useState([]);
 
   useEffect(() => {
-    if (loading) {
-      return;
-    }
+    const loadUserTypeAndEvents = async () => {
+      if (loading) {
+        return;
+      }
 
-    if (!session) {
-      setMessage("You are not logged in, to see your events please log in.");
-      const timer = setTimeout(() => {
-        router.push("/Auth");
-      }, 3000);
+      if (!session) {
+        setMessage("You are not logged in, to see your events please log in.");
+        const timer = setTimeout(() => {
+          router.push("/Auth");
+        }, 3000);
 
-      return () => clearTimeout(timer);
-    }
+        return () => clearTimeout(timer);
+      }
+      await fetchUserType(session, setUserType);
 
-    setMessage("");
-  }, [session, loading, router]);
+      if (userType === "admin") {
+        const events = await fetchUserEvents(session.user.id, userType);
+        setMyEventsList(events);
+      }
+
+      setMessage("");
+    };
+
+    loadUserTypeAndEvents();
+  }, [session, loading, router, userType]);
 
   if (loading) {
     return (
@@ -39,7 +55,7 @@ const MyEvents = () => {
       {message ? (
         <Text style={styles.message}>{message}</Text>
       ) : (
-        <Text>My Events Page</Text>
+        <MyEventsList events={myEventsList} />
       )}
     </View>
   );
