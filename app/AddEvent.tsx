@@ -13,8 +13,10 @@ import { DismissKeyboard } from "@/components/DissmissKeyboard";
 import { useRouter } from "expo-router";
 import { useSession } from "@/context/SessionContext";
 import { insertNewEvent } from "@/utils/insertNewEvent";
+import validateURL from "@/utils/validateURL";
 
 type EventDetails = {
+  image: string;
   title: string;
   location: string;
   description: string;
@@ -26,6 +28,7 @@ type EventDetails = {
 export default function AddEvent() {
   const session = useSession();
   const [eventDetails, setEventDetails] = useState<EventDetails>({
+    image: "",
     title: "",
     location: "",
     description: "",
@@ -45,14 +48,21 @@ export default function AddEvent() {
       Alert.alert("Error", "Session not loaded. Please try again later.");
       return;
     }
-    
 
-    const { title, location, description, date, openingTime, closingTime } = eventDetails;
+    const {
+      image,
+      title,
+      location,
+      description,
+      date,
+      openingTime,
+      closingTime,
+    } = eventDetails;
 
-    if (!title || !description) {
+    if (!title || !description || !validateURL(image)) {
       Alert.alert(
         "Validation Error",
-        "Please fill out all fields before adding the event."
+        "Please fill out all fields correctly, and ensure the URLs are valid"
       );
       return;
     }
@@ -66,6 +76,7 @@ export default function AddEvent() {
 
     try {
       await insertNewEvent({
+        image,
         title,
         location,
         description,
@@ -126,6 +137,18 @@ export default function AddEvent() {
             placeholder="Enter event title"
             value={eventDetails.title}
             onChangeText={(text) => handleChange("title", text)}
+          />
+          <Text style={styles.label}>Image URL</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter event image URL"
+            value={eventDetails.image}
+            onChangeText={(text) => {
+              handleChange("image", text);
+            }}
+            multiline
+            numberOfLines={4}
+            keyboardType="url"
           />
 
           <Text style={styles.label}>Location</Text>
