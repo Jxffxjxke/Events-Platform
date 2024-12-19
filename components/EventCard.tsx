@@ -52,7 +52,6 @@ const EventCard = ({ event }: { event: Event }) => {
             <Text style={styles.modalTitle}>Event Description</Text>
             <Text>{event.description}</Text>
 
-            {/* Close Modal Button */}
             <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
               <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity>

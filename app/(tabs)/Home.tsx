@@ -4,10 +4,12 @@ import { useSession } from "@/context/SessionContext";
 import EventsList from "@/components/EventsList";
 import { fetchUserType } from "@/utils/fetchUserType";
 import { UserType } from "@/types/AuthProps";
+import { useNavigation } from "@react-navigation/native";
 
 const Home = () => {
   const session = useSession();
   const [userType, setUserType] = useState<UserType>(null);
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (session) {
@@ -16,7 +18,7 @@ const Home = () => {
   }, [session]);
 
   const handleAddEvent = () => {
-    console.log("Add event button pressed");
+    navigation.navigate("addEvent");
   };
 
   return (
