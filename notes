@@ -1,5 +1,3 @@
-Need to check if user is 'user' or 'admin' to conditionally render add event component. Will be a small circle with plus on to navigate to add new event page.
-
 Need a bin icon on events that are created by the admin for that admin.
 
 Create SQL querys to suit add new event, remove event.
