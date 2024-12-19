@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabase";
 
 interface EventDetails {
   title: string;
+  location: string;
   description: string;
   date: Date;
   openingTime: Date;
@@ -11,19 +12,21 @@ interface EventDetails {
 
 export const insertNewEvent = async ({
   title,
+  location,
   description,
   date,
   openingTime,
   closingTime,
   creator_id,
 }: EventDetails) => {
-  console.log({
-    title,
-    description,
-    date,
-    openingTime,
-    closingTime,
-    creator_id,
+  
+  const formattedOpeningTime = openingTime.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const formattedClosingTime = closingTime.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
   });
 
   try {
@@ -32,10 +35,11 @@ export const insertNewEvent = async ({
       .insert([
         {
           title,
+          location,
           description,
           date: date.toISOString(),
-          doorsopen: openingTime.toISOString(),
-          doorsclose: closingTime.toISOString(),
+          doorsopen: formattedOpeningTime,
+          doorsclose: formattedClosingTime,
           creator_id,
         },
       ])
