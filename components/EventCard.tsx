@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   infoButton: {
     position: "absolute",
-    top: "50%", // Center vertically
+    top: "50%",
     right: 10,
     backgroundColor: "#007BFF",
     padding: 8,

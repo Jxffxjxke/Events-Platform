@@ -16,6 +16,7 @@ import { insertNewEvent } from "@/utils/insertNewEvent";
 
 type EventDetails = {
   title: string;
+  location: string;
   description: string;
   date: Date;
   openingTime: Date;
@@ -26,6 +27,7 @@ export default function AddEvent() {
   const session = useSession();
   const [eventDetails, setEventDetails] = useState<EventDetails>({
     title: "",
+    location: "",
     description: "",
     date: new Date(),
     openingTime: new Date(),
@@ -43,8 +45,9 @@ export default function AddEvent() {
       Alert.alert("Error", "Session not loaded. Please try again later.");
       return;
     }
+    
 
-    const { title, description, date, openingTime, closingTime } = eventDetails;
+    const { title, location, description, date, openingTime, closingTime } = eventDetails;
 
     if (!title || !description) {
       Alert.alert(
@@ -64,6 +67,7 @@ export default function AddEvent() {
     try {
       await insertNewEvent({
         title,
+        location,
         description,
         date,
         openingTime,
@@ -85,7 +89,7 @@ export default function AddEvent() {
     }
   };
 
-  const handleChange = (field: keyof EventDetails, value: any) => {
+  const handleChange = (field: keyof EventDetails, value: string | Date) => {
     setEventDetails((prevDetails) => ({
       ...prevDetails,
       [field]: value,
@@ -122,6 +126,18 @@ export default function AddEvent() {
             placeholder="Enter event title"
             value={eventDetails.title}
             onChangeText={(text) => handleChange("title", text)}
+          />
+
+          <Text style={styles.label}>Location</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter event location"
+            value={eventDetails.location}
+            onChangeText={(text) => {
+              handleChange("location", text);
+            }}
+            multiline
+            numberOfLines={4}
           />
 
           <Text style={styles.label}>Description</Text>
