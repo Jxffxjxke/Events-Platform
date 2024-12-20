@@ -6,6 +6,7 @@ import { fetchUserType } from "@/utils/fetchUserType";
 import { UserType } from "@/types/AuthProps";
 import MyEventsList from "@/components/MyEventsList";
 import fetchUserEvents from "@/utils/fetchUserEvents";
+import { EventDetails } from "@/types/EventDetails";
 
 const MyEvents = () => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const MyEvents = () => {
   const loading = useLoading();
   const [message, setMessage] = useState<string>("");
   const [userType, setUserType] = useState<UserType>(null);
-  const [myEventsList, setMyEventsList] = useState([]);
+  const [myEventsList, setMyEventsList] = useState<EventDetails[]>([]);
 
   useEffect(() => {
     const loadUserTypeAndEvents = async () => {
@@ -29,11 +30,18 @@ const MyEvents = () => {
 
         return () => clearTimeout(timer);
       }
+
       await fetchUserType(session, setUserType);
 
       if (userType === "admin") {
-        const events = await fetchUserEvents(session.user.id, userType);
-        setMyEventsList(events);
+        const events = await fetchUserEvents(session.user.id);
+
+        if (!events || events.length === 0) {
+          setMessage("You have no current events.");
+          setMyEventsList([]);
+        } else {
+          setMyEventsList(events as EventDetails[]);
+        }
       }
 
       setMessage("");
@@ -44,35 +52,21 @@ const MyEvents = () => {
 
   if (loading) {
     return (
-      <View style={styles.container}>
+      <View>
         <Text>Loading...</Text>
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View>
       {message ? (
-        <Text style={styles.message}>{message}</Text>
+        <Text>{message}</Text>
       ) : (
         <MyEventsList events={myEventsList} />
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  message: {
-    fontSize: 18,
-    textAlign: "center",
-    color: "red",
-  },
-});
 
 export default MyEvents;

@@ -14,16 +14,7 @@ import { useRouter } from "expo-router";
 import { useSession } from "@/context/SessionContext";
 import { insertNewEvent } from "@/utils/insertNewEvent";
 import validateURL from "@/utils/validateURL";
-
-type EventDetails = {
-  image: string;
-  title: string;
-  location: string;
-  description: string;
-  date: Date;
-  openingTime: Date;
-  closingTime: Date;
-};
+import { EventDetails } from "@/types/EventDetails";
 
 export default function AddEvent() {
   const session = useSession();
