@@ -1,12 +1,9 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
 import { useSession } from "../../context/SessionContext";
-import { useLayoutEffect } from "react";
 
-export default function App() {
+export default function TabsLayout() {
   const session = useSession();
-
-  useLayoutEffect(() => {}, [session]);
 
   return (
     <Tabs>
@@ -20,15 +17,17 @@ export default function App() {
           ),
         }}
       />
+
       <Tabs.Screen
         name="MyEvents"
         options={{
-          title: "MyEvents",
+          title: "My Events",
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="list" color={color} />
           ),
         }}
       />
+
       <Tabs.Screen
         name="Auth"
         options={{

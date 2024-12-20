@@ -1,11 +1,21 @@
-import { useState } from "react";
-import { Text, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
+import { EventDetails } from "@/types/EventDetails";
+import MyEventsCard from "./MyEventsCard";
 
-export default function MyEventsList() {
+interface MyEventsListProps {
+  events: EventDetails[];
+}
 
+export default function MyEventsList({ events }: MyEventsListProps) {
   return (
     <View>
-      <Text>User event list</Text>
+      <FlatList
+        data={events}
+        renderItem={({ item }) => <MyEventsCard event={item} />}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({});
