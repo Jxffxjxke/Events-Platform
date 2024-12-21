@@ -13,7 +13,7 @@ const MyEvents = () => {
   const session = useSession();
   const loading = useLoading();
   const [message, setMessage] = useState<string>("");
-  const [userType, setUserType] = useState<UserType>(null);
+  const [userType, setUserType] = useState<UserType | null>(null);
   const [myEventsList, setMyEventsList] = useState<EventDetails[]>([]);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const MyEvents = () => {
       }
 
       if (!session) {
-        setMessage("You are not logged in, to see your events please log in.");
+        setMessage("You are not logged in. Please log in to see your events.");
         const timer = setTimeout(() => {
           router.push("/Auth");
         }, 3000);
@@ -31,9 +31,21 @@ const MyEvents = () => {
         return () => clearTimeout(timer);
       }
 
-      await fetchUserType(session, setUserType);
+      try {
+        await fetchUserType(session, setUserType);
+      } catch (error) {
+        console.error("Error fetching user type:", error);
+        setMessage("An error occurred while fetching your user type.");
+        return;
+      }
+    };
 
-      if (userType === "admin") {
+    loadUserTypeAndEvents();
+  }, [session, loading, router]);
+
+  useEffect(() => {
+    const fetchEventsIfAdmin = async () => {
+      if (userType === "admin" && session) {
         const events = await fetchUserEvents(session.user.id);
 
         if (!events || events.length === 0) {
@@ -42,26 +54,30 @@ const MyEvents = () => {
         } else {
           setMyEventsList(events as EventDetails[]);
         }
+      } else if (userType && userType !== "admin") {
+        setMessage(
+          "This page is for admins only. If you wish to become an admin and start adding your own events, contact jj.whittaker01@gmail.com."
+        );
       }
-
-      setMessage("");
     };
 
-    loadUserTypeAndEvents();
-  }, [session, loading, router, userType]);
+    if (userType) {
+      fetchEventsIfAdmin();
+    }
+  }, [userType, session]);
 
   if (loading) {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Loading...</Text>
       </View>
     );
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       {message ? (
-        <Text>{message}</Text>
+        <Text style={styles.centeredMessage}>{message}</Text>
       ) : (
         <MyEventsList events={myEventsList} />
       )}
@@ -70,3 +86,18 @@ const MyEvents = () => {
 };
 
 export default MyEvents;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
+  centeredMessage: {
+    textAlign: "center",
+    fontSize: 16,
+    color: "#333",
+    margin: 5,
+  },
+});
