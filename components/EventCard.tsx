@@ -8,6 +8,8 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
+import * as Calendar from "expo-calendar";
+import { Alert } from "react-native";
 
 interface Event {
   title: string;
@@ -29,15 +31,45 @@ const EventCard = ({ event }: { event: Event }) => {
     setIsModalVisible(false);
   };
 
+  const addEventToCalendar = async () => {
+    const hasPermission = await Calendar.requestPermissionsAsync();
+    if (hasPermission.status !== "granted") {
+      Alert.alert(
+        "Permission required",
+        "We need access to your calendar to add events."
+      );
+      return;
+    }
+
+    const eventDetails = {
+      title: event.title,
+      startDate: new Date(event.date), // Assuming `event.date` is in a valid format
+      endDate: new Date(event.date), // Adjust the end date as needed
+      timeZone: "GMT",
+      location: "Somewhere", // You can update this if you have location data
+      notes: event.description,
+    };
+
+    try {
+      const calendarId = await Calendar.getDefaultCalendarAsync();
+      await Calendar.createEventAsync(calendarId.id, eventDetails);
+      Alert.alert("Event Added", "The event has been added to your calendar.");
+    } catch (error) {
+      console.error("Error adding event:", error);
+      Alert.alert(
+        "Error",
+        "There was an issue adding the event to your calendar."
+      );
+    }
+  };
+
   return (
     <View style={styles.card}>
       <Image source={{ uri: event.image }} style={styles.cardImage} />
 
       <View style={styles.cardContent}>
         <Text style={[styles.title, styles.mv]}>{event.title}</Text>
-
         <Text style={styles.mv}>{formatDate(event.date)}</Text>
-
         <Text style={styles.mv}>
           {event.doorsopen} - {event.doorsclose}
         </Text>
@@ -47,6 +79,12 @@ const EventCard = ({ event }: { event: Event }) => {
         </TouchableOpacity>
       </View>
 
+      {/* Add to Calendar Button */}
+      <TouchableOpacity style={styles.addButton} onPress={addEventToCalendar}>
+        <Text style={styles.addButtonText}>+</Text>
+      </TouchableOpacity>
+
+      {/* Modal for event description */}
       <Modal visible={isModalVisible} animationType="slide" transparent={true}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
@@ -98,6 +136,23 @@ const styles = StyleSheet.create({
   infoText: {
     color: "white",
     fontSize: 18,
+  },
+  addButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    backgroundColor: "rgba(0, 123, 255, 0.5)", // Semi-transparent blue
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 5, // Adds a shadow to the button
+  },
+  addButtonText: {
+    color: "white",
+    fontSize: 30,
+    fontWeight: "bold",
   },
   modalOverlay: {
     flex: 1,
