@@ -3,7 +3,7 @@ export type EventDetails = {
   title: string;
   location: string;
   description: string;
-  date: Date | string;
+  date: Date;
   openingTime: Date;
   closingTime: Date;
   creator_id?: string;
