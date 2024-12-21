@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Image,
+  ScrollView,
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -17,7 +19,7 @@ import validateURL from "@/utils/validateURL";
 import { EventDetails } from "@/types/EventDetails";
 import { faker } from "@faker-js/faker";
 
-export default function addEvent() {
+export default function AddEvent() {
   const session = useSession();
   const [eventDetails, setEventDetails] = useState<EventDetails>({
     image: "",
@@ -28,6 +30,8 @@ export default function addEvent() {
     openingTime: new Date(),
     closingTime: new Date(),
   });
+
+  console.log(eventDetails);
 
   const router = useRouter();
 
@@ -122,137 +126,150 @@ export default function addEvent() {
   return (
     <SafeAreaProvider>
       <DismissKeyboard>
-        <View style={styles.container}>
-          <Text style={styles.label}>Event Title</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter event title"
-            value={eventDetails.title}
-            onChangeText={(text) => handleChange("title", text)}
-          />
-          <Text style={styles.label}>Image URL</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter event image URL"
-            value={eventDetails.image}
-            onChangeText={(text) => {
-              handleChange("image", text);
-            }}
-            multiline
-            numberOfLines={4}
-            keyboardType="url"
-          />
-          <TouchableOpacity onPress={() => {
-            handleChange('image', faker.image.url())
-          }}>
-            <Text>Add stock photo</Text>
-          </TouchableOpacity>
-
-          <Text style={styles.label}>Location</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter event location"
-            value={eventDetails.location}
-            onChangeText={(text) => {
-              handleChange("location", text);
-            }}
-            multiline
-            numberOfLines={4}
-          />
-
-          <Text style={styles.label}>Description</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter event description"
-            value={eventDetails.description}
-            onChangeText={(text) => handleChange("description", text)}
-            multiline
-            numberOfLines={4}
-          />
-
-          <Text style={styles.label}>Select Date</Text>
-          <TouchableOpacity
-            style={styles.pickerButton}
-            onPress={() => setDatePicker(true)}
-          >
-            <Text style={styles.pickerButtonText}>
-              {eventDetails.date.toDateString()}
-            </Text>
-          </TouchableOpacity>
-          {datePicker && (
-            <DateTimePicker
-              value={eventDetails.date}
-              mode="date"
-              display="default"
-              onChange={(event, selectedDate) => handleDateChange(selectedDate)}
+        <ScrollView>
+          <View style={styles.container}>
+            <Text style={[styles.label, styles.mt40]}>Event Title</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter event title"
+              value={eventDetails.title}
+              onChangeText={(text) => handleChange("title", text)}
             />
-          )}
+            {validateURL(eventDetails.image) && (
+              <Image
+                source={{ uri: eventDetails.image }}
+                style={styles.image}
+                alt="Event"
+              />
+            )}
+            <Text style={styles.label}>Image URL</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter event image URL"
+              value={eventDetails.image}
+              onChangeText={(text) => {
+                handleChange("image", text);
+              }}
+              multiline
+              numberOfLines={4}
+              keyboardType="url"
+            />
+            <TouchableOpacity
+              onPress={() => {
+                handleChange("image", faker.image.url());
+              }}
+            >
+              <Text>Add stock photo</Text>
+            </TouchableOpacity>
 
-          <View style={styles.timePickerContainer}>
-            <View style={styles.timePicker}>
-              <Text style={styles.label}>Opening Time</Text>
-              <TouchableOpacity
-                style={styles.pickerButton}
-                onPress={() => setOpeningTimePicker(true)}
-              >
-                <Text style={styles.pickerButtonText}>
-                  {eventDetails.openingTime.toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </Text>
-              </TouchableOpacity>
-              {openingTimePicker && (
-                <DateTimePicker
-                  value={eventDetails.openingTime}
-                  mode="time"
-                  display="default"
-                  onChange={(event, selectedTime) => {
-                    handleTimeChange("openingTime", selectedTime);
-                    setOpeningTimePicker(false);
-                  }}
-                />
-              )}
+            <Text style={styles.label}>Location</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter event location"
+              value={eventDetails.location}
+              onChangeText={(text) => {
+                handleChange("location", text);
+              }}
+              multiline
+              numberOfLines={4}
+            />
+
+            <Text style={styles.label}>Description</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter event description"
+              value={eventDetails.description}
+              onChangeText={(text) => handleChange("description", text)}
+              multiline
+              numberOfLines={4}
+            />
+
+            <Text style={styles.label}>Select Date</Text>
+            <TouchableOpacity
+              style={styles.pickerButton}
+              onPress={() => setDatePicker(true)}
+            >
+              <Text style={styles.pickerButtonText}>
+                {eventDetails.date.toDateString()}
+              </Text>
+            </TouchableOpacity>
+            {datePicker && (
+              <DateTimePicker
+                value={eventDetails.date}
+                mode="date"
+                display="default"
+                onChange={(event, selectedDate) =>
+                  handleDateChange(selectedDate)
+                }
+              />
+            )}
+
+            <View style={styles.timePickerContainer}>
+              <View style={styles.timePicker}>
+                <Text style={styles.label}>Opening Time</Text>
+                <TouchableOpacity
+                  style={styles.pickerButton}
+                  onPress={() => setOpeningTimePicker(true)}
+                >
+                  <Text style={styles.pickerButtonText}>
+                    {eventDetails.openingTime.toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </Text>
+                </TouchableOpacity>
+                {openingTimePicker && (
+                  <DateTimePicker
+                    value={eventDetails.openingTime}
+                    mode="time"
+                    display="default"
+                    onChange={(event, selectedTime) => {
+                      handleTimeChange("openingTime", selectedTime);
+                      setOpeningTimePicker(false);
+                    }}
+                  />
+                )}
+              </View>
+
+              <View style={styles.timePicker}>
+                <Text style={styles.label}>Closing Time</Text>
+                <TouchableOpacity
+                  style={styles.pickerButton}
+                  onPress={() => setClosingTimePicker(true)}
+                >
+                  <Text style={styles.pickerButtonText}>
+                    {eventDetails.closingTime.toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </Text>
+                </TouchableOpacity>
+                {closingTimePicker && (
+                  <DateTimePicker
+                    value={eventDetails.closingTime}
+                    mode="time"
+                    display="default"
+                    onChange={(event, selectedTime) => {
+                      handleTimeChange("closingTime", selectedTime);
+                      setClosingTimePicker(false);
+                    }}
+                  />
+                )}
+              </View>
             </View>
 
-            <View style={styles.timePicker}>
-              <Text style={styles.label}>Closing Time</Text>
-              <TouchableOpacity
-                style={styles.pickerButton}
-                onPress={() => setClosingTimePicker(true)}
-              >
-                <Text style={styles.pickerButtonText}>
-                  {eventDetails.closingTime.toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </Text>
-              </TouchableOpacity>
-              {closingTimePicker && (
-                <DateTimePicker
-                  value={eventDetails.closingTime}
-                  mode="time"
-                  display="default"
-                  onChange={(event, selectedTime) => {
-                    handleTimeChange("closingTime", selectedTime);
-                    setClosingTimePicker(false);
-                  }}
-                />
-              )}
-            </View>
+            <TouchableOpacity style={styles.addButton} onPress={handleAddEvent}>
+              <Text style={styles.addButtonText}>Add Event</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => router.push("/Home")}
+            >
+              <Text style={styles.backButtonText}>Back</Text>
+            </TouchableOpacity>
           </View>
-
-          <TouchableOpacity style={styles.addButton} onPress={handleAddEvent}>
-            <Text style={styles.addButtonText}>Add Event</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => router.push("/Home")}
-          >
-            <Text style={styles.backButtonText}>Back</Text>
-          </TouchableOpacity>
-        </View>
+        </ScrollView>
       </DismissKeyboard>
     </SafeAreaProvider>
   );
@@ -328,5 +345,14 @@ const styles = StyleSheet.create({
   backButtonText: {
     color: "#fff",
     fontWeight: "bold",
+  },
+  image: {
+    width: 300,
+    height: 200,
+    marginBottom: 20,
+    borderRadius: 20,
+  },
+  mt40: {
+    marginTop: 40,
   },
 });

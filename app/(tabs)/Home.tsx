@@ -22,7 +22,8 @@ const Home = () => {
   }, [session]);
 
   const handleAddEvent = () => {
-    navigation.navigate("addEvent");
+    // ?? Dont understand this error, 'AddEvent' is the page name.
+    navigation.navigate("AddEvent");
   };
 
   return (
