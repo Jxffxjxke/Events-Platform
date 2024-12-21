@@ -21,6 +21,9 @@ interface Event {
 }
 
 const EventCard = ({ event }: { event: Event }) => {
+  console.log("Start Date:", event.doorsopen);
+  console.log("End Date:", event.doorsclose);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const openModal = () => {
@@ -32,7 +35,7 @@ const EventCard = ({ event }: { event: Event }) => {
   };
 
   const addEventToCalendar = async () => {
-    const hasPermission = await Calendar.requestPermissionsAsync();
+    const hasPermission = await Calendar.requestCalendarPermissionsAsync();
     if (hasPermission.status !== "granted") {
       Alert.alert(
         "Permission required",
@@ -41,10 +44,27 @@ const EventCard = ({ event }: { event: Event }) => {
       return;
     }
 
+    const currentDate = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+    const startDateString = `${currentDate}T${event.doorsopen}:00`; // Append time to today's date
+    const endDateString = `${currentDate}T${event.doorsclose}:00`; // Append time to today's date
+
+    const startDate = new Date(startDateString);
+    const endDate = new Date(endDateString);
+
+    // Check if the dates are valid
+    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+      console.error("Invalid dates:", event.doorsopen, event.doorsclose);
+      Alert.alert(
+        "Error",
+        "There was an issue with the event's dates. Please check the event details."
+      );
+      return;
+    }
+
     const eventDetails = {
       title: event.title,
-      startDate: new Date(event.doorsopen), 
-      endDate: new Date(event.doorsclose),
+      startDate: startDate,
+      endDate: endDate,
       timeZone: "GMT",
       location: "Somewhere",
       notes: event.description,
@@ -79,12 +99,10 @@ const EventCard = ({ event }: { event: Event }) => {
         </TouchableOpacity>
       </View>
 
-      {/* Add to Calendar Button */}
       <TouchableOpacity style={styles.addButton} onPress={addEventToCalendar}>
         <Text style={styles.addButtonText}>+</Text>
       </TouchableOpacity>
 
-      {/* Modal for event description */}
       <Modal visible={isModalVisible} animationType="slide" transparent={true}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
@@ -141,13 +159,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 10,
     right: 10,
-    backgroundColor: "rgba(0, 123, 255, 0.5)", // Semi-transparent blue
+    backgroundColor: "rgba(0, 123, 255, 0.5)",
     borderRadius: 25,
     width: 50,
     height: 50,
     justifyContent: "center",
     alignItems: "center",
-    elevation: 5, // Adds a shadow to the button
+    elevation: 5,
   },
   addButtonText: {
     color: "white",
