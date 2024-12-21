@@ -22,7 +22,7 @@ const Home = () => {
   }, [session]);
 
   const handleAddEvent = () => {
-    navigation.navigate("AddEvent");
+    navigation.navigate("addEvent");
   };
 
   return (

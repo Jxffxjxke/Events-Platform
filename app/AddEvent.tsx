@@ -15,8 +15,9 @@ import { useSession } from "@/context/SessionContext";
 import { insertNewEvent } from "@/utils/insertNewEvent";
 import validateURL from "@/utils/validateURL";
 import { EventDetails } from "@/types/EventDetails";
+import { faker } from "@faker-js/faker";
 
-export default function AddEvent() {
+export default function addEvent() {
   const session = useSession();
   const [eventDetails, setEventDetails] = useState<EventDetails>({
     image: "",
@@ -141,6 +142,11 @@ export default function AddEvent() {
             numberOfLines={4}
             keyboardType="url"
           />
+          <TouchableOpacity onPress={() => {
+            handleChange('image', faker.image.url())
+          }}>
+            <Text>Add stock photo</Text>
+          </TouchableOpacity>
 
           <Text style={styles.label}>Location</Text>
           <TextInput
