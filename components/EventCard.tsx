@@ -43,10 +43,10 @@ const EventCard = ({ event }: { event: Event }) => {
 
     const eventDetails = {
       title: event.title,
-      startDate: new Date(event.date), // Assuming `event.date` is in a valid format
-      endDate: new Date(event.date), // Adjust the end date as needed
+      startDate: new Date(event.doorsopen), 
+      endDate: new Date(event.doorsclose),
       timeZone: "GMT",
-      location: "Somewhere", // You can update this if you have location data
+      location: "Somewhere",
       notes: event.description,
     };
 
