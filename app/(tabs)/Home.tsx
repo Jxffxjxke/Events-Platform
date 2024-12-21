@@ -27,7 +27,7 @@ const Home = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <EventsList />
+      <EventsList style={styles.m20 } />
       {userType === "admin" && (
         <TouchableOpacity style={styles.addButton} onPress={handleAddEvent}>
           <Text style={styles.addButtonText}>+</Text>
@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
   },
+  m20: {
+    margin: 20
+  }
 });
 
 export default Home;
