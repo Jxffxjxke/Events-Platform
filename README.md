@@ -2,7 +2,7 @@
 
 ## Description
 
-The Event Management App is a mobile application designed to simplify event browsing and management. Built with TypeScript, React Native, Expo, and the Google Calendar API, the app allows users to:
+The Event Management App is a mobile application designed to simplify event browsing and management. Built with TypeScript, React Native and Expo, the app allows users to:
 
 - Browse a list of available events.
 - Add events to their Mobile Calendar directly from the app.
@@ -46,7 +46,7 @@ _as I have LAN issues when hosting locally_
 
 ### Run on Your Device or Emulator:
 - Use the Expo Go app on your mobile device to scan the QR code displayed in the terminal/browser.
-- Alternatively, run the app on an emulator using Android Studio or Xcode.
+- Alternatively, run the app on an emulator using Xcode.
 
 ## Usage Examples
 
