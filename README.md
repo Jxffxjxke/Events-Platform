@@ -38,6 +38,12 @@ Run the app in Expo:
 npx expo start
 ```
 
+_I run:_
+```bash
+npx expo start --tunnel
+```
+_as I have LAN issues when hosting locally_
+
 ### Run on Your Device or Emulator:
 - Use the Expo Go app on your mobile device to scan the QR code displayed in the terminal/browser.
 - Alternatively, run the app on an emulator using Android Studio or Xcode.
