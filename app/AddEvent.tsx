@@ -31,8 +31,6 @@ export default function AddEvent() {
     closingTime: new Date(),
   });
 
-  console.log(eventDetails);
-
   const router = useRouter();
 
   const [datePicker, setDatePicker] = useState<boolean>(false);
