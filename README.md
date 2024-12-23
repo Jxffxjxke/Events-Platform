@@ -26,7 +26,11 @@ npm install
 ### Create ENV variables:
 1. Create a .env file.
 2. Contact me regarding the **EXPO_PUBLIC_SUPABASE_URL** and **EXPO_PUBLIC_SUPABASE_ANON_KEY**.
-3. Create the variables above in the .env file.
+3. Create the variables in the .env file
+```bash
+EXPO_PUBLIC_SUPABASE_URL=given_url
+EXPO_PUBLIC_SUPABASE_ANON_KEY=given_key
+```
 
 ### Start the Development Server:
 Run the app in Expo:
