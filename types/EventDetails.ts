@@ -1,4 +1,5 @@
 export type EventDetails = {
+  id?: string;
   image: string;
   title: string;
   location: string;

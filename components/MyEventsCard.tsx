@@ -1,6 +1,15 @@
 import { EventDetails } from "@/types/EventDetails";
 import { formatDate } from "@/utils/formatDate";
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import handleDelete from "@/utils/handleDelete";
+import { Icon } from "@rneui/themed";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 
 interface MyEventsCardProps {
   event: EventDetails;
@@ -22,6 +31,16 @@ export function MyEventsCard({ event }: MyEventsCardProps) {
           {event.description}
         </Text>
       </View>
+
+      <TouchableOpacity
+        style={styles.binIcon}
+        onPress={() => {
+          if(!event.id){throw new Error('Error finding event')}
+         handleDelete(event.id);
+        }}
+      >
+        <Icon name="delete" size={24} color="#888" />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -44,6 +63,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
+    position: "relative",
   },
   image: {
     width: 80,
@@ -72,6 +92,20 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 12,
     color: "#888",
+  },
+  binIcon: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    width: 24,
+    height: 24,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  iconImage: {
+    width: 20,
+    height: 20,
+    tintColor: "#888",
   },
 });
 

@@ -21,10 +21,9 @@ export default async function addEventToCalendar() {
   };
 
   try {
-    const calendarId = await Calendar.getDefaultCalendarAsync(); 
+    const calendarId = await Calendar.getDefaultCalendarAsync();
     await Calendar.createEventAsync(calendarId.id, eventDetails);
-    console.log("Event created!");
   } catch (error) {
-    console.error("Error creating event:", error);
+    throw new Error("Error creating event");
   }
 }

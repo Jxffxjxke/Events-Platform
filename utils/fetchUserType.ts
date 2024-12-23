@@ -21,7 +21,6 @@ export const fetchUserType = async (
 
     setUserType(data?.user_type || "User type not found");
   } catch (error) {
-    console.error("Error fetching user type:", error);
     setUserType(null);
   }
 };

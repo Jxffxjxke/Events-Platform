@@ -64,7 +64,7 @@ const MyEvents = () => {
     if (userType) {
       fetchEventsIfAdmin();
     }
-  }, [userType, session]);
+  }, [userType, session, myEventsList]);
 
   if (loading) {
     return (

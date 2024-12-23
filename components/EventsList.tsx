@@ -5,7 +5,7 @@ import { getEventsList } from "@/utils/getEventsList";
 import { Event } from "@/types/Event";
 
 interface EventsListProps {
-  style?: StyleProp<ViewStyle>; 
+  style?: StyleProp<ViewStyle>;
 }
 
 const EventsList: React.FC<EventsListProps> = ({ style }) => {

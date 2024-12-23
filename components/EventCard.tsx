@@ -21,8 +21,6 @@ interface Event {
 }
 
 const EventCard = ({ event }: { event: Event }) => {
-  console.log("Start Date:", event.doorsopen);
-  console.log("End Date:", event.doorsclose);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -44,16 +42,15 @@ const EventCard = ({ event }: { event: Event }) => {
       return;
     }
 
-    const currentDate = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
-    const startDateString = `${currentDate}T${event.doorsopen}:00`; // Append time to today's date
-    const endDateString = `${currentDate}T${event.doorsclose}:00`; // Append time to today's date
+    const currentDate = new Date().toISOString().split("T")[0]; 
+    const startDateString = `${currentDate}T${event.doorsopen}:00`;
+    const endDateString = `${currentDate}T${event.doorsclose}:00`;
 
     const startDate = new Date(startDateString);
     const endDate = new Date(endDateString);
 
-    // Check if the dates are valid
+
     if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-      console.error("Invalid dates:", event.doorsopen, event.doorsclose);
       Alert.alert(
         "Error",
         "There was an issue with the event's dates. Please check the event details."
@@ -75,7 +72,6 @@ const EventCard = ({ event }: { event: Event }) => {
       await Calendar.createEventAsync(calendarId.id, eventDetails);
       Alert.alert("Event Added", "The event has been added to your calendar.");
     } catch (error) {
-      console.error("Error adding event:", error);
       Alert.alert(
         "Error",
         "There was an issue adding the event to your calendar."
