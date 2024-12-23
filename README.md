@@ -66,9 +66,9 @@ _as I have LAN issues when hosting locally_
 3. After filling in the details, tap "Save" to add the event to the Events list.
 
 ### Admin: Deleting an Event
-1. Navigate to the **My Events** page, where the admin can view all events.
+1. Navigate to the **My Events** page, where the admin can view all of their events.
 2. For each event, there will be a bin icon next to it.
-3. Tap the bin icon for the event you want to delete.
+3. Tap the bin icon to delete an event.
 
 ### Admin Access
 Use the following test admin credentials to log in:
@@ -88,5 +88,5 @@ Explore event browsing and adding events to your calendar.
 
 If you have any questions or suggestions, feel free to reach out:
 
-- **GitHub**: @jxffxjxke
-- **Email**: jakewhittaker.dev@example.com
+- **GitHub**: @Jxffxjxke
+- **Email**: jj.whittaker01@gmail.com
