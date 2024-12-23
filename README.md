@@ -6,16 +6,15 @@ The Event Management App is a mobile application designed to simplify event brow
 
 - Browse a list of available events.
 - Add events to their Mobile Calendar directly from the app.
-- Provide admin access for event management and other administrative tasks.
-
-This app is a user-friendly solution for organizations and individuals who want to streamline event handling.
+- Provide admin access for event management.
 
 ## Installation Instructions
 
 ### Clone the Repository:
 ```bash
-git clone https://github.com/jxffxjxke/event-management-app.git
-cd event-management-app
+git clone https://github.com/jxffxjxke/Events-Platform.git
+cd Events-Platform
+
 ```
 
 ### Install Dependencies:
@@ -24,17 +23,15 @@ Ensure you have Node.js installed, then run:
 npm install
 ```
 
-### Set Up Environment Variables:
-Create a `.env` file in the root directory and add your Supabase credentials:
-```
-EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
-EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
+### Create ENV variables:
+1. Create a .env file.
+2. Contact me regarding the **EXPO_PUBLIC_SUPABASE_URL** and **EXPO_PUBLIC_SUPABASE_ANON_KEY**.
+3. Create the variables above in the .env file.
 
 ### Start the Development Server:
 Run the app in Expo:
 ```bash
-expo start
+npx expo start
 ```
 
 ### Run on Your Device or Emulator:
@@ -45,13 +42,23 @@ expo start
 
 ### Browsing Events
 1. Launch the app.
-2. Navigate to the Events tab to view a list of available events.
+2. This should open on the Home page with a list of Events.
 3. Tap an event to view more details.
 
 ### Adding Events to Calendar
-1. Select an event from the list.
-2. Tap the **Add to Calendar** button.
+1. As a user, select an event from the list.
+2. Tap the **+** button.
 3. The event will be added directly to your Mobile Calendar.
+
+### Admin: Adding an Event
+1. On the Home page, tap the **+** button located in the bottom right corner.
+2. A form will appear prompting the admin to enter the event details (e.g., event name, date, time, description).
+3. After filling in the details, tap "Save" to add the event to the Events list.
+
+### Admin: Deleting an Event
+1. Navigate to the **My Events** page, where the admin can view all events.
+2. For each event, there will be a bin icon next to it.
+3. Tap the bin icon for the event you want to delete.
 
 ### Admin Access
 Use the following test admin credentials to log in:
@@ -66,28 +73,6 @@ Use the following test user credentials:
 - **Password**: TestPassword
 
 Explore event browsing and adding events to your calendar.
-
-## Contribution Guidelines
-
-We welcome contributions to this project! To contribute:
-
-### Fork the Repository
-Visit the repository and click the "Fork" button.
-
-### Create a Feature Branch
-Clone your forked repository locally and create a new branch:
-```bash
-git checkout -b feature/your-feature-name
-```
-
-### Make Your Changes
-Implement your changes and ensure the code is properly formatted and tested.
-
-### Submit a Pull Request
-Push your changes to your forked repository and submit a pull request to the main repository.
-
-### Code Review
-Address any feedback provided during the review process.
 
 ## Contact
 
