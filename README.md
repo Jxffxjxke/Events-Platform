@@ -17,6 +17,12 @@ cd Events-Platform
 
 ```
 
+### Make sure you have the EXPO CLI installed:
+```bash
+npm install --global expo
+
+```
+
 ### Install Dependencies:
 Ensure you have Node.js installed, then run:
 ```bash

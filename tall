@@ -1,0 +1,551 @@
+[1mdiff --git a/README.md b/README.md[m
+[1mindex a343da6..4e2482c 100644[m
+[1m--- a/README.md[m
+[1m+++ b/README.md[m
+[36m@@ -17,6 +17,12 @@[m [mcd Events-Platform[m
+ [m
+ ```[m
+ [m
+[32m+[m[32m### Make sure you have the EXPO CLI installed:[m
+[32m+[m[32m```bash[m
+[32m+[m[32mnpm install --global expo[m
+[32m+[m
+[32m+[m[32m```[m
+[32m+[m
+ ### Install Dependencies:[m
+ Ensure you have Node.js installed, then run:[m
+ ```bash[m
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex 96e85b0..53cabfa 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -61,9 +61,9 @@[m
+       }[m
+     },[m
+     "node_modules/@0no-co/graphql.web": {[m
+[31m-      "version": "1.0.11",[m
+[31m-      "resolved": "https://registry.npmjs.org/@0no-co/graphql.web/-/graphql.web-1.0.11.tgz",[m
+[31m-      "integrity": "sha512-xuSJ9WXwTmtngWkbdEoopMo6F8NLtjy84UNAMsAr5C3/2SgAL/dEU10TMqTIsipqPQ8HA/7WzeqQ9DEQxSvPPA==",[m
+[32m+[m[32m      "version": "1.0.12",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@0no-co/graphql.web/-/graphql.web-1.0.12.tgz",[m
+[32m+[m[32m      "integrity": "sha512-BTDjjsV/zSPy5fqItwm+KWUfh9CSe9tTtR6rCB72ddtkAxdcHbi4Ir4r/L1Et4lyxmL+i7Rb3m9sjLLi9tYrzA==",[m
+       "license": "MIT",[m
+       "peerDependencies": {[m
+         "graphql": "^14.0.0 || ^15.0.0 || ^16.0.0"[m
+[36m@@ -2101,9 +2101,9 @@[m
+       }[m
+     },[m
+     "node_modules/@babel/preset-react": {[m
+[31m-      "version": "7.25.9",[m
+[31m-      "resolved": "https://registry.npmjs.org/@babel/preset-react/-/preset-react-7.25.9.tgz",[m
+[31m-      "integrity": "sha512-D3to0uSPiWE7rBrdIICCd0tJSIGpLaaGptna2+w7Pft5xMqLpA1sz99DK5TZ1TjGbdQ/VI1eCSZ06dv3lT4JOw==",[m
+[32m+[m[32m      "version": "7.26.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@babel/preset-react/-/preset-react-7.26.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-Nl03d6T9ky516DGK2YMxrTqvnpUW63TnJMOMonj+Zae0JiPC5BC9xPMSL6L8fiSpA5vP88qfygavVQvnLp+6Cw==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@babel/helper-plugin-utils": "^7.25.9",[m
+[36m@@ -2439,9 +2439,9 @@[m
+       }[m
+     },[m
+     "node_modules/@expo/cli": {[m
+[31m-      "version": "0.22.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@expo/cli/-/cli-0.22.0.tgz",[m
+[31m-      "integrity": "sha512-89yOeyA8ObTxxR8izv80foYITXPtsyU0Q+LTalD8PytISRtmWqgbJ2b8go2kPrJJRJ8urUKIIo6k6ShjMurRxw==",[m
+[32m+[m[32m      "version": "0.22.7",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@expo/cli/-/cli-0.22.7.tgz",[m
+[32m+[m[32m      "integrity": "sha512-aNrUPVFPdIX42Q6UM6qygrN4DUqnXMDS1CnkTfNFVIZWRiJ1TUA05Zk6aF35M674CKd/c/dWHFjmbgjsyN/hEA==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@0no-co/graphql.web": "^1.0.8",[m
+[36m@@ -2453,15 +2453,15 @@[m
+         "@expo/env": "~0.4.0",[m
+         "@expo/image-utils": "^0.6.0",[m
+         "@expo/json-file": "^9.0.0",[m
+[31m-        "@expo/metro-config": "~0.19.0",[m
+[32m+[m[32m        "@expo/metro-config": "~0.19.8",[m
+         "@expo/osascript": "^2.0.31",[m
+         "@expo/package-manager": "^1.5.0",[m
+         "@expo/plist": "^0.2.0",[m
+[31m-        "@expo/prebuild-config": "^8.0.17",[m
+[32m+[m[32m        "@expo/prebuild-config": "^8.0.23",[m
+         "@expo/rudder-sdk-node": "^1.1.1",[m
+         "@expo/spawn-async": "^1.7.2",[m
+         "@expo/xcpretty": "^4.3.0",[m
+[31m-        "@react-native/dev-middleware": "0.76.3",[m
+[32m+[m[32m        "@react-native/dev-middleware": "0.76.5",[m
+         "@urql/core": "^5.0.6",[m
+         "@urql/exchange-retry": "^1.3.0",[m
+         "accepts": "^1.3.8",[m
+[36m@@ -2520,6 +2520,61 @@[m
+         "expo-internal": "build/bin/cli"[m
+       }[m
+     },[m
+[32m+[m[32m    "node_modules/@expo/cli/node_modules/@react-native/debugger-frontend": {[m
+[32m+[m[32m      "version": "0.76.5",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@react-native/debugger-frontend/-/debugger-frontend-0.76.5.tgz",[m
+[32m+[m[32m      "integrity": "sha512-5gtsLfBaSoa9WP8ToDb/8NnDBLZjv4sybQQj7rDKytKOdsXm3Pr2y4D7x7GQQtP1ZQRqzU0X0OZrhRz9xNnOqA==",[m
+[32m+[m[32m      "license": "BSD-3-Clause",[m
+[32m+[m[32m      "engines": {[m
+[32m+[m[32m        "node": ">=18"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+[32m+[m[32m    "node_modules/@expo/cli/node_modules/@react-native/dev-middleware": {[m
+[32m+[m[32m      "version": "0.76.5",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@react-native/dev-middleware/-/dev-middleware-0.76.5.tgz",[m
+[32m+[m[32m      "integrity": "sha512-f8eimsxpkvMgJia7POKoUu9uqjGF6KgkxX4zqr/a6eoR1qdEAWUd6PonSAqtag3PAqvEaJpB99gLH2ZJI1nDGg==",[m
+[32m+[m[32m      "license": "MIT",[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "@isaacs/ttlcache": "^1.4.1",[m
+[32m+[m[32m        "@react-native/debugger-frontend": "0.76.5",[m
+[32m+[m[32m        "chrome-launcher": "^0.15.2",[m
+[32m+[m[32m        "chromium-edge-launcher": "^0.2.0",[m
+[32m+[m[32m        "connect": "^3.6.5",[m
+[32m+[m[32m        "debug": "^2.2.0",[m
+[32m+[m[32m        "nullthrows": "^1.1.1",[m
+[32m+[m[32m        "open": "^7.0.3",[m
+[32m+[m[32m        "selfsigned": "^2.4.1",[m
+[32m+[m[32m        "serve-static": "^1.13.1",[m
+[32m+[m[32m        "ws": "^6.2.3"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "engines": {[m
+[32m+[m[32m        "node": ">=18"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+[32m+[m[32m    "node_modules/@expo/cli/node_modules/@react-native/dev-middleware/node_modules/debug": {[m
+[32m+[m[32m      "version": "2.6.9",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz",[m
+[32m+[m[32m      "integrity": "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==",[m
+[32m+[m[32m      "license": "MIT",[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "ms": "2.0.0"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+[32m+[m[32m    "node_modules/@expo/cli/node_modules/@react-native/dev-middleware/node_modules/ws": {[m
+[32m+[m[32m      "version": "6.2.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/ws/-/ws-6.2.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-jmTjYU0j60B+vHey6TfR3Z7RD61z/hmxBS3VMSGIrroOWXQEneK1zNuotOUrGyBHQj0yrpsLHPWtigEFd13ndA==",[m
+[32m+[m[32m      "license": "MIT",[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "async-limiter": "~1.0.0"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+[32m+[m[32m    "node_modules/@expo/cli/node_modules/ms": {[m
+[32m+[m[32m      "version": "2.0.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==",[m
+[32m+[m[32m      "license": "MIT"[m
+[32m+[m[32m    },[m
+     "node_modules/@expo/cli/node_modules/semver": {[m
+       "version": "7.6.3",[m
+       "resolved": "https://registry.npmjs.org/semver/-/semver-7.6.3.tgz",[m
+[36m@@ -2543,9 +2598,9 @@[m
+       }[m
+     },[m
+     "node_modules/@expo/config": {[m
+[31m-      "version": "10.0.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@expo/config/-/config-10.0.5.tgz",[m
+[31m-      "integrity": "sha512-wq48h3HlAPq5v/gMprarAiVY1aEXNBVJ+Em0vrHcYFO8UyxzR6oIao2E4Ed3VWHqhTzPXkMPH4hKCKlzFVBFwQ==",[m
+[32m+[m[32m      "version": "10.0.6",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@expo/config/-/config-10.0.6.tgz",[m
+[32m+[m[32m      "integrity": "sha512-xXkfPElrtxznkOZxFASJ7OPa6E9IHSjcZwj5BQ6XUF2dz5M7AFa2h5sXM8AalSaDU5tEBSgoUOjTh5957TlR8g==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@babel/code-frame": "~7.10.4",[m
+[36m@@ -2564,9 +2619,9 @@[m
+       }[m
+     },[m
+     "node_modules/@expo/config-plugins": {[m
+[31m-      "version": "9.0.11",[m
+[31m-      "resolved": "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-9.0.11.tgz",[m
+[31m-      "integrity": "sha512-zufuPQWkeEpXfMWFx2lWStoN43p6cO13p8n2KMIEK6jJMC/kkfldYyl8gYtEEYAL1nFfOf/W2pIXXPQ2sggnSw==",[m
+[32m+[m[32m      "version": "9.0.12",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-9.0.12.tgz",[m
+[32m+[m[32m      "integrity": "sha512-/Ko/NM+GzvJyRkq8PITm8ms0KY5v0wmN1OQFYRMkcJqOi3PjlhndW+G6bHpJI9mkQXBaUnHwAiGLqIC3+MQ5Wg==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@expo/config-types": "^52.0.0",[m
+[36m@@ -2667,9 +2722,9 @@[m
+       }[m
+     },[m
+     "node_modules/@expo/fingerprint": {[m
+[31m-      "version": "0.11.3",[m
+[31m-      "resolved": "https://registry.npmjs.org/@expo/fingerprint/-/fingerprint-0.11.3.tgz",[m
+[31m-      "integrity": "sha512-9lgXmcIePvZ7Wef63XtvuN3HfCUevF4E4tQPdEbH9/dUWwpOvvwQ3KT4OJ9jdh8JJ3nTdO9eDQ/8k8xr1aQ5Kg==",[m
+[32m+[m[32m      "version": "0.11.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@expo/fingerprint/-/fingerprint-0.11.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-FfcvHjrWjOJ17wiMfr1iQ1YDyjlj8qfxG+GDce0khrjNSkzRjVdCOIFsMvfVSBPnOPX5NuZlgMRvMkcPUtGClA==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@expo/spawn-async": "^1.7.2",[m
+[36m@@ -2795,9 +2850,9 @@[m
+       }[m
+     },[m
+     "node_modules/@expo/metro-config": {[m
+[31m-      "version": "0.19.5",[m
+[31m-      "resolved": "https://registry.npmjs.org/@expo/metro-config/-/metro-config-0.19.5.tgz",[m
+[31m-      "integrity": "sha512-wl5lVgXq4FN4kBJHNyU5U9J5hH8S8rYXrp/pgbwA+J/smQfiElYKMYomTGbHUb4LQ0VnmlX6/kI4x/zJk+mq7w==",[m
+[32m+[m[32m      "version": "0.19.8",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@expo/metro-config/-/metro-config-0.19.8.tgz",[m
+[32m+[m[32m      "integrity": "sha512-dVAOetouQYuOTEJ2zR0OTLNPOH6zPkeEt5fY53TK0Wxi1QmtsmH6vEWg05U4zkSJ6f1aXmQ0Za77R8QxuukESA==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@babel/core": "^7.20.0",[m
+[36m@@ -2902,6 +2957,7 @@[m
+       "version": "9.1.1",[m
+       "resolved": "https://registry.npmjs.org/sudo-prompt/-/sudo-prompt-9.1.1.tgz",[m
+       "integrity": "sha512-es33J1g2HjMpyAhz8lOR+ICmXXAqTuKbuXuUWLhOLew20oN9oUCgCJx615U/v7aioZg7IX5lIh9x34vwneu4pA==",[m
+[32m+[m[32m      "deprecated": "Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.",[m
+       "license": "MIT"[m
+     },[m
+     "node_modules/@expo/plist": {[m
+[36m@@ -2916,9 +2972,9 @@[m
+       }[m
+     },[m
+     "node_modules/@expo/prebuild-config": {[m
+[31m-      "version": "8.0.21",[m
+[31m-      "resolved": "https://registry.npmjs.org/@expo/prebuild-config/-/prebuild-config-8.0.21.tgz",[m
+[31m-      "integrity": "sha512-PVvt7+2dLzmf1X4HaoibnTtfoxnor0YEdu396eLv1SG+KacmN5lMz81yO/2MXvv0SDA6THomgBNvA/uzWV5twA==",[m
+[32m+[m[32m      "version": "8.0.23",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@expo/prebuild-config/-/prebuild-config-8.0.23.tgz",[m
+[32m+[m[32m      "integrity": "sha512-Zf01kFiN2PISmLb0DhIAJh76v3J2oYUKSjiAtGZLOH0HUz59by/qdyU4mGHWdeyRdCCrLUA21Rct2MBykvRMsg==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@expo/config": "~10.0.4",[m
+[36m@@ -2926,7 +2982,7 @@[m
+         "@expo/config-types": "^52.0.0",[m
+         "@expo/image-utils": "^0.6.0",[m
+         "@expo/json-file": "^9.0.0",[m
+[31m-        "@react-native/normalize-colors": "0.76.3",[m
+[32m+[m[32m        "@react-native/normalize-colors": "0.76.5",[m
+         "debug": "^4.3.1",[m
+         "fs-extra": "^9.0.0",[m
+         "resolve-from": "^5.0.0",[m
+[36m@@ -2934,6 +2990,12 @@[m
+         "xml2js": "0.6.0"[m
+       }[m
+     },[m
+[32m+[m[32m    "node_modules/@expo/prebuild-config/node_modules/@react-native/normalize-colors": {[m
+[32m+[m[32m      "version": "0.76.5",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@react-native/normalize-colors/-/normalize-colors-0.76.5.tgz",[m
+[32m+[m[32m      "integrity": "sha512-6QRLEok1r55gLqj+94mEWUENuU5A6wsr2OoXpyq/CgQ7THWowbHtru/kRGRr6o3AQXrVnZheR60JNgFcpNYIug==",[m
+[32m+[m[32m      "license": "MIT"[m
+[32m+[m[32m    },[m
+     "node_modules/@expo/prebuild-config/node_modules/fs-extra": {[m
+       "version": "9.1.0",[m
+       "resolved": "https://registry.npmjs.org/fs-extra/-/fs-extra-9.1.0.tgz",[m
+[36m@@ -3040,9 +3102,9 @@[m
+       }[m
+     },[m
+     "node_modules/@expo/xcpretty": {[m
+[31m-      "version": "4.3.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/@expo/xcpretty/-/xcpretty-4.3.1.tgz",[m
+[31m-      "integrity": "sha512-sqXgo1SCv+j4VtYEwl/bukuOIBrVgx6euIoCat3Iyx5oeoXwEA2USCoeL0IPubflMxncA2INkqJ/Wr3NGrSgzw==",[m
+[32m+[m[32m      "version": "4.3.2",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@expo/xcpretty/-/xcpretty-4.3.2.tgz",[m
+[32m+[m[32m      "integrity": "sha512-ReZxZ8pdnoI3tP/dNnJdnmAk7uLT4FjsKDGW7YeDdvdOMz2XCQSmSCM9IWlrXuWtMF9zeSB6WJtEhCQ41gQOfw==",[m
+       "license": "BSD-3-Clause",[m
+       "dependencies": {[m
+         "@babel/code-frame": "7.10.4",[m
+[36m@@ -4870,9 +4932,9 @@[m
+       "license": "MIT"[m
+     },[m
+     "node_modules/@urql/core": {[m
+[31m-      "version": "5.0.8",[m
+[31m-      "resolved": "https://registry.npmjs.org/@urql/core/-/core-5.0.8.tgz",[m
+[31m-      "integrity": "sha512-1GOnUw7/a9bzkcM0+U8U5MmxW2A7FE5YquuEmcJzTtW5tIs2EoS4F2ITpuKBjRBbyRjZgO860nWFPo1m4JImGA==",[m
+[32m+[m[32m      "version": "5.1.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@urql/core/-/core-5.1.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-yC3sw8yqjbX45GbXxfiBY8GLYCiyW/hLBbQF9l3TJrv4ro00Y0ChkKaD9I2KntRxAVm9IYBqh0awX8fwWAe/Yw==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@0no-co/graphql.web": "^1.0.5",[m
+[36m@@ -5683,9 +5745,9 @@[m
+       }[m
+     },[m
+     "node_modules/babel-preset-expo": {[m
+[31m-      "version": "12.0.3",[m
+[31m-      "resolved": "https://registry.npmjs.org/babel-preset-expo/-/babel-preset-expo-12.0.3.tgz",[m
+[31m-      "integrity": "sha512-1695e8y3U/HjifKx33vcNnFMSUSXwPWwhFxRlL6NRx2TENN6gySH82gPOWgxcra6gi+EJgXx52xG3PcqTjwW6w==",[m
+[32m+[m[32m      "version": "12.0.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/babel-preset-expo/-/babel-preset-expo-12.0.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-SAzAwqpyjA+/OFrU95OOioj6oTeCv4+rRfrNmBTy5S/gJswrZKBSPJioFudIaJBy43W+BL7HA5AspBIF6tO/aA==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@babel/plugin-proposal-decorators": "^7.12.9",[m
+[36m@@ -5694,7 +5756,7 @@[m
+         "@babel/plugin-transform-parameters": "^7.22.15",[m
+         "@babel/preset-react": "^7.22.15",[m
+         "@babel/preset-typescript": "^7.23.0",[m
+[31m-        "@react-native/babel-preset": "0.76.3",[m
+[32m+[m[32m        "@react-native/babel-preset": "0.76.5",[m
+         "babel-plugin-react-native-web": "~0.19.13",[m
+         "react-refresh": "^0.14.2"[m
+       },[m
+[36m@@ -5711,6 +5773,120 @@[m
+         }[m
+       }[m
+     },[m
+[32m+[m[32m    "node_modules/babel-preset-expo/node_modules/@react-native/babel-plugin-codegen": {[m
+[32m+[m[32m      "version": "0.76.5",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@react-native/babel-plugin-codegen/-/babel-plugin-codegen-0.76.5.tgz",[m
+[32m+[m[32m      "integrity": "sha512-xe7HSQGop4bnOLMaXt0aU+rIatMNEQbz242SDl8V9vx5oOTI0VbZV9yLy6yBc6poUlYbcboF20YVjoRsxX4yww==",[m
+[32m+[m[32m      "license": "MIT",[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "@react-native/codegen": "0.76.5"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "engines": {[m
+[32m+[m[32m        "node": ">=18"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+[32m+[m[32m    "node_modules/babel-preset-expo/node_modules/@react-native/babel-preset": {[m
+[32m+[m[32m      "version": "0.76.5",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@react-native/babel-preset/-/babel-preset-0.76.5.tgz",[m
+[32m+[m[32m      "integrity": "sha512-1Nu5Um4EogOdppBLI4pfupkteTjWfmI0hqW8ezWTg7Bezw0FtBj8yS8UYVd3wTnDFT9A5mA2VNoNUqomJnvj2A==",[m
+[32m+[m[32m      "license": "MIT",[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "@babel/core": "^7.25.2",[m
+[32m+[m[32m        "@babel/plugin-proposal-export-default-from": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-syntax-dynamic-import": "^7.8.3",[m
+[32m+[m[32m        "@babel/plugin-syntax-export-default-from": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-syntax-nullish-coalescing-operator": "^7.8.3",[m
+[32m+[m[32m        "@babel/plugin-syntax-optional-chaining": "^7.8.3",[m
+[32m+[m[32m        "@babel/plugin-transform-arrow-functions": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-async-generator-functions": "^7.25.4",[m
+[32m+[m[32m        "@babel/plugin-transform-async-to-generator": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-block-scoping": "^7.25.0",[m
+[32m+[m[32m        "@babel/plugin-transform-class-properties": "^7.25.4",[m
+[32m+[m[32m        "@babel/plugin-transform-classes": "^7.25.4",[m
+[32m+[m[32m        "@babel/plugin-transform-computed-properties": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-destructuring": "^7.24.8",[m
+[32m+[m[32m        "@babel/plugin-transform-flow-strip-types": "^7.25.2",[m
+[32m+[m[32m        "@babel/plugin-transform-for-of": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-function-name": "^7.25.1",[m
+[32m+[m[32m        "@babel/plugin-transform-literals": "^7.25.2",[m
+[32m+[m[32m        "@babel/plugin-transform-logical-assignment-operators": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-modules-commonjs": "^7.24.8",[m
+[32m+[m[32m        "@babel/plugin-transform-named-capturing-groups-regex": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-nullish-coalescing-operator": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-numeric-separator": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-object-rest-spread": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-optional-catch-binding": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-optional-chaining": "^7.24.8",[m
+[32m+[m[32m        "@babel/plugin-transform-parameters": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-private-methods": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-private-property-in-object": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-react-display-name": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-react-jsx": "^7.25.2",[m
+[32m+[m[32m        "@babel/plugin-transform-react-jsx-self": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-react-jsx-source": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-regenerator": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-runtime": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-shorthand-properties": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-spread": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-sticky-regex": "^7.24.7",[m
+[32m+[m[32m        "@babel/plugin-transform-typescript": "^7.25.2",[m
+[32m+[m[32m        "@babel/plugin-transform-unicode-regex": "^7.24.7",[m
+[32m+[m[32m        "@babel/template": "^7.25.0",[m
+[32m+[m[32m        "@react-native/babel-plugin-codegen": "0.76.5",[m
+[32m+[m[32m        "babel-plugin-syntax-hermes-parser": "^0.25.1",[m
+[32m+[m[32m        "babel-plugin-transform-flow-enums": "^0.0.2",[m
+[32m+[m[32m        "react-refresh": "^0.14.0"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "engines": {[m
+[32m+[m[32m        "node": ">=18"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "peerDependencies": {[m
+[32m+[m[32m        "@babel/core": "*"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+[32m+[m[32m    "node_modules/babel-preset-expo/node_modules/@react-native/codegen": {[m
+[32m+[m[32m      "version": "0.76.5",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@react-native/codegen/-/codegen-0.76.5.tgz",[m
+[32m+[m[32m      "integrity": "sha512-FoZ9VRQ5MpgtDAnVo1rT9nNRfjnWpE40o1GeJSDlpUMttd36bVXvsDm8W/NhX8BKTWXSX+CPQJsRcvN1UPYGKg==",[m
+[32m+[m[32m      "license": "MIT",[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "@babel/parser": "^7.25.3",[m
+[32m+[m[32m        "glob": "^7.1.1",[m
+[32m+[m[32m        "hermes-parser": "0.23.1",[m
+[32m+[m[32m        "invariant": "^2.2.4",[m
+[32m+[m[32m        "jscodeshift": "^0.14.0",[m
+[32m+[m[32m        "mkdirp": "^0.5.1",[m
+[32m+[m[32m        "nullthrows": "^1.1.1",[m
+[32m+[m[32m        "yargs": "^17.6.2"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "engines": {[m
+[32m+[m[32m        "node": ">=18"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "peerDependencies": {[m
+[32m+[m[32m        "@babel/preset-env": "^7.1.6"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+[32m+[m[32m    "node_modules/babel-preset-expo/node_modules/glob": {[m
+[32m+[m[32m      "version": "7.2.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/glob/-/glob-7.2.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==",[m
+[32m+[m[32m      "deprecated": "Glob versions prior to v9 are no longer supported",[m
+[32m+[m[32m      "license": "ISC",[m
+[32m+[m[32m      "dependencies": {[m
+[32m+[m[32m        "fs.realpath": "^1.0.0",[m
+[32m+[m[32m        "inflight": "^1.0.4",[m
+[32m+[m[32m        "inherits": "2",[m
+[32m+[m[32m        "minimatch": "^3.1.1",[m
+[32m+[m[32m        "once": "^1.3.0",[m
+[32m+[m[32m        "path-is-absolute": "^1.0.0"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "engines": {[m
+[32m+[m[32m        "node": "*"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "funding": {[m
+[32m+[m[32m        "url": "https://github.com/sponsors/isaacs"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+     "node_modules/babel-preset-jest": {[m
+       "version": "29.6.3",[m
+       "resolved": "https://registry.npmjs.org/babel-preset-jest/-/babel-preset-jest-29.6.3.tgz",[m
+[36m@@ -7400,26 +7576,26 @@[m
+       }[m
+     },[m
+     "node_modules/expo": {[m
+[31m-      "version": "52.0.14",[m
+[31m-      "resolved": "https://registry.npmjs.org/expo/-/expo-52.0.14.tgz",[m
+[31m-      "integrity": "sha512-omGLh6cmaFZPcvTuMZY9Pi0aBOseeJI7MjJAAbi2rFssNVJJme44jM0CJ4Hq3p/6XqSFlZMqnuAfsAAzm/c/Rg==",[m
+[32m+[m[32m      "version": "52.0.21",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/expo/-/expo-52.0.21.tgz",[m
+[32m+[m[32m      "integrity": "sha512-+yYIvUczlM7zvqjwCtCH4OtLaX0F1/35oAlNmPK5lV1RIVVRjKfBeZ8kK+jNNUwY9gZnrk8oeN6E2qcqohyOcw==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@babel/runtime": "^7.20.0",[m
+[31m-        "@expo/cli": "0.22.0",[m
+[31m-        "@expo/config": "~10.0.5",[m
+[31m-        "@expo/config-plugins": "~9.0.11",[m
+[31m-        "@expo/fingerprint": "0.11.3",[m
+[31m-        "@expo/metro-config": "0.19.5",[m
+[32m+[m[32m        "@expo/cli": "0.22.7",[m
+[32m+[m[32m        "@expo/config": "~10.0.6",[m
+[32m+[m[32m        "@expo/config-plugins": "~9.0.12",[m
+[32m+[m[32m        "@expo/fingerprint": "0.11.4",[m
+[32m+[m[32m        "@expo/metro-config": "0.19.8",[m
+         "@expo/vector-icons": "^14.0.0",[m
+[31m-        "babel-preset-expo": "~12.0.3",[m
+[32m+[m[32m        "babel-preset-expo": "~12.0.4",[m
+         "expo-asset": "~11.0.1",[m
+         "expo-constants": "~17.0.3",[m
+[31m-        "expo-file-system": "~18.0.4",[m
+[31m-        "expo-font": "~13.0.1",[m
+[32m+[m[32m        "expo-file-system": "~18.0.6",[m
+[32m+[m[32m        "expo-font": "~13.0.2",[m
+         "expo-keep-awake": "~14.0.1",[m
+[31m-        "expo-modules-autolinking": "2.0.3",[m
+[31m-        "expo-modules-core": "2.1.1",[m
+[32m+[m[32m        "expo-modules-autolinking": "2.0.4",[m
+[32m+[m[32m        "expo-modules-core": "2.1.2",[m
+         "fbemitter": "^3.0.0",[m
+         "web-streams-polyfill": "^3.3.2",[m
+         "whatwg-url-without-unicode": "8.0.0-3"[m
+[36m@@ -7499,9 +7675,9 @@[m
+       }[m
+     },[m
+     "node_modules/expo-file-system": {[m
+[31m-      "version": "18.0.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/expo-file-system/-/expo-file-system-18.0.4.tgz",[m
+[31m-      "integrity": "sha512-aAWEDwnu0XHOBYvQ9Q0+QIa+483vYJaC4IDsXyWQ73Rtsg273NZh5kYowY+cAocvoSmA99G6htrLBn11ax2bTQ==",[m
+[32m+[m[32m      "version": "18.0.6",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/expo-file-system/-/expo-file-system-18.0.6.tgz",[m
+[32m+[m[32m      "integrity": "sha512-gGEwIJCXV3/wpIJ/wRyhmieLOSAY7HeFFjb+wEfHs04aE63JYR+rXXV4b7rBpEh1ZgNV9U91zfet/iQG7J8HBQ==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "web-streams-polyfill": "^3.3.2"[m
+[36m@@ -7512,9 +7688,9 @@[m
+       }[m
+     },[m
+     "node_modules/expo-font": {[m
+[31m-      "version": "13.0.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/expo-font/-/expo-font-13.0.1.tgz",[m
+[31m-      "integrity": "sha512-8JE47B+6cLeKWr5ql8gU6YsPHjhrz1vMrTqYMm72No/8iW8Sb/uL4Oc0dpmbjq3hLLXBY0xPBQOgU7FQ6Y04Vg==",[m
+[32m+[m[32m      "version": "13.0.2",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/expo-font/-/expo-font-13.0.2.tgz",[m
+[32m+[m[32m      "integrity": "sha512-H9FaXM7ZW5+EfV38w80BgJG3H17kB7CuVXwHoiszIYyoPfWz9bWesFe4QwNZjTq3pzKes28sSd8irFuflIrSIA==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "fontfaceobserver": "^2.1.0"[m
+[36m@@ -7579,9 +7755,9 @@[m
+       }[m
+     },[m
+     "node_modules/expo-modules-autolinking": {[m
+[31m-      "version": "2.0.3",[m
+[31m-      "resolved": "https://registry.npmjs.org/expo-modules-autolinking/-/expo-modules-autolinking-2.0.3.tgz",[m
+[31m-      "integrity": "sha512-Q/ALJ54eS7Cr7cmbP+unEDTkHFQivQerWWrqZxuXOrSFYGCYU22+/xAZXaJOpZwseOVsP74zSkoRY/wBimVs7w==",[m
+[32m+[m[32m      "version": "2.0.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/expo-modules-autolinking/-/expo-modules-autolinking-2.0.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-e0p+19NhmD50U7s7BV7kWIypWmTNC9n/VlJKlXS05hM/zX7pe6JKmXyb+BFnXJq3SLBalLCUY0tu2gEUF3XeVg==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@expo/spawn-async": "^1.7.2",[m
+[36m@@ -7634,9 +7810,9 @@[m
+       }[m
+     },[m
+     "node_modules/expo-modules-core": {[m
+[31m-      "version": "2.1.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/expo-modules-core/-/expo-modules-core-2.1.1.tgz",[m
+[31m-      "integrity": "sha512-yQzYCLR2mre4BNMXuqkeJ0oSNgmGEMI6BcmIzeNZbC2NFEjiaDpKvlV9bclYCtyVhUEVNbJcEPYMr6c1Y4eR4w==",[m
+[32m+[m[32m      "version": "2.1.2",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/expo-modules-core/-/expo-modules-core-2.1.2.tgz",[m
+[32m+[m[32m      "integrity": "sha512-0OhMU5S8zf9c/CRh1MwiXfOInI9wzz6yiIh5RuR/9J7N6xHRum68hInsPbaSc1UQpo08ZZLM4MPsbpoNRUoqIg==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "invariant": "^2.2.4"[m
+[36m@@ -7806,9 +7982,9 @@[m
+       "license": "BSD-3-Clause"[m
+     },[m
+     "node_modules/fastq": {[m
+[31m-      "version": "1.17.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/fastq/-/fastq-1.17.1.tgz",[m
+[31m-      "integrity": "sha512-sRVD3lWVIXWg6By68ZN7vho9a1pQcN/WBFaAAsDDFzlJjvoGx0P8z7V1t72grFJfJhu3YPZBuu25f7Kaw2jN1w==",[m
+[32m+[m[32m      "version": "1.18.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/fastq/-/fastq-1.18.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-QKHXPW0hD8g4UET03SdOdunzSouc9N4AuHdsX8XNcTsuz+yYFILVNIX4l9yHABMhiEI9Db0JTTIpu0wB+Y1QQw==",[m
+       "license": "ISC",[m
+       "dependencies": {[m
+         "reusify": "^1.0.4"[m
+[36m@@ -14434,6 +14610,7 @@[m
+       "version": "8.2.5",[m
+       "resolved": "https://registry.npmjs.org/sudo-prompt/-/sudo-prompt-8.2.5.tgz",[m
+       "integrity": "sha512-rlBo3HU/1zAJUrkY6jNxDOC9eVYliG6nS4JA8u8KAshITd07tafMc/Br7xQwCSseXwJ2iCcHCE8SNWX3q8Z+kw==",[m
+[32m+[m[32m      "deprecated": "Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.",[m
+       "license": "MIT"[m
+     },[m
+     "node_modules/supports-color": {[m
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 49efa2a..374f3be 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -28,6 +28,7 @@[m
+     "dotenv": "^16.4.6",[m
+     "expo": "~52.0.11",[m
+     "expo-blur": "~14.0.1",[m
+[32m+[m[32m    "expo-calendar": "~14.0.5",[m
+     "expo-constants": "~17.0.3",[m
+     "expo-font": "~13.0.1",[m
+     "expo-haptics": "~14.0.0",[m
+[36m@@ -51,8 +52,7 @@[m
+     "react-native-settings-components": "^0.0.2",[m
+     "react-native-web": "~0.19.13",[m
+     "react-native-webview": "13.12.2",[m
+[31m-    "react-select": "^5.9.0",[m
+[31m-    "expo-calendar": "~14.0.5"[m
+[32m+[m[32m    "react-select": "^5.9.0"[m
+   },[m
+   "devDependencies": {[m
+     "@babel/core": "^7.25.2",[m
+[1mdiff --git a/tsconfig.json b/tsconfig.json[m
+[1mindex f0e6ec7..4cd0e97 100644[m
+[1m--- a/tsconfig.json[m
+[1m+++ b/tsconfig.json[m
+[36m@@ -1,5 +1,5 @@[m
+ {[m
+[31m-  "extends": "expo/tsconfig.base",[m
+[32m+[m[32m  "extends": "expo/tsconfig.base.json",[m
+   "compilerOptions": {[m
+     "strict": true,[m
+     "paths": {[m
