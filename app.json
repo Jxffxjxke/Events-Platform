@@ -9,10 +9,17 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "extra": {
-      "SKIDDLE_API_KEY": "eaa92cb57d1d9d72a69feaddf994ff60"
+      "SKIDDLE_API_KEY": "eaa92cb57d1d9d72a69feaddf994ff60",
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "859ea1e6-42b9-4433-9b71-6ff3fe7d72d4"
+      }
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jxffxjxke.EventsPlatform"
     },
     "android": {
       "adaptiveIcon": {
@@ -39,6 +46,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/859ea1e6-42b9-4433-9b71-6ff3fe7d72d4"
     }
   }
 }
