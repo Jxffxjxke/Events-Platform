@@ -8,6 +8,8 @@ The Event Management App is a mobile application designed to simplify event brow
 - Add events to their Mobile Calendar directly from the app.
 - Provide admin access for event management.
 
+This app is hosted at https://expo.dev/preview/update?message=Update%20packages&updateRuntimeVersion=1.0.0&createdAt=2025-01-12T15%3A32%3A56.093Z&slug=exp&projectId=859ea1e6-42b9-4433-9b71-6ff3fe7d72d4&group=4ed37667-c88f-4178-bae2-c79a1bb14f41
+
 ## Installation Instructions
 
 ### Clone the Repository:
